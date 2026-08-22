@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>octra | lite node</title>
+  <title>octra | sovereign node & wallet suite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,13 +36,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2.5rem 1.5rem;
+      padding: 1.5rem 1rem;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
       width: 100%;
-      max-width: 860px;
+      max-width: 980px;
     }
 
     /* Header matching octra.org */
@@ -50,9 +50,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.2rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .brand {
@@ -104,18 +104,66 @@
       color: var(--cyan);
     }
 
+    /* Suite Tabs */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.4rem;
+      border-radius: 8px;
+      margin-bottom: 1.8rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 0, 235, 0.2);
+      border-color: rgba(0, 0, 235, 0.6);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Tab Panels */
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
     /* Hero / Status Section */
     .hero {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .hero h1 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 500;
       line-height: 1.4;
       color: var(--text);
       letter-spacing: -0.5px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     .hero h1 span {
@@ -268,6 +316,106 @@
       white-space: pre-wrap;
     }
 
+    /* Embedded Tool Frames */
+    .tool-frame-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .tool-frame-header {
+      background: #05060a;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .tool-frame {
+      width: 100%;
+      height: 720px;
+      border: none;
+      background: #ffffff;
+    }
+
+    /* Key Generator Styles */
+    .keygen-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .keygen-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .keygen-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .keygen-action-btn {
+      background: var(--blue);
+      color: #ffffff;
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .keygen-action-btn:hover {
+      opacity: 0.9;
+    }
+
+    .key-output-box {
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .seed-phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.6rem;
+      background: #000000;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .seed-word {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--cyan);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.35rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .seed-word span {
+      color: var(--text-dim);
+      margin-right: 0.3rem;
+    }
+
     /* Footer matching octra.org */
     footer {
       margin-top: auto;
@@ -303,7 +451,7 @@
           <circle cx="25" cy="25" r="21" stroke="#0000EB" stroke-width="8"/>
         </svg>
         <div class="brand-title">
-          octra <span class="node-tag">// lite node</span>
+          octra <span class="node-tag">// node & wallet suite</span>
         </div>
       </div>
       <nav class="nav-links">
@@ -314,51 +462,130 @@
       </nav>
     </header>
 
-    <!-- Hero / Tagline -->
-    <div class="hero">
-      <h1>octra is universal encrypted compute for <span>blockchain, ai and apps</span></h1>
-      <div class="status-bar">
-        <div class="pulse-dot"></div>
-        <span id="status-badge">DEVNET CONSENSUS • OPERATIONAL</span>
+    <!-- Navigation Tabs -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('node')">🔵 Node Telemetry</button>
+      <button class="tab-btn" onclick="switchTab('wallet')">👛 Web Wallet</button>
+      <button class="tab-btn" onclick="switchTab('cipher')">🔒 FHE Cipher</button>
+      <button class="tab-btn" onclick="switchTab('circles')">⚙️ Circles IDE</button>
+      <button class="tab-btn" onclick="switchTab('swap')">🔄 Token Swap</button>
+      <button class="tab-btn" onclick="switchTab('keygen')">🔑 Key Generator</button>
+    </div>
+
+    <!-- TAB 1: Node Telemetry -->
+    <div id="tab-node" class="tab-panel active">
+      <div class="hero">
+        <h1>octra is universal encrypted compute for <span>blockchain, ai and apps</span></h1>
+        <div class="status-bar">
+          <div class="pulse-dot"></div>
+          <span id="status-badge">DEVNET CONSENSUS • OPERATIONAL</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-label">Consensus Epoch</div>
+          <div class="card-value highlight" id="epoch-counter">Syncing...</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Engine Status</div>
+          <div class="card-value" id="node-status">RUNNING</div>
+        </div>
+        <div class="card">
+          <div class="card-label">FHE Circuit Engine</div>
+          <div class="card-value" style="font-size: 0.95rem; color: #a5b4fc;">PVAC-HFHE (2¹²⁷-1)</div>
+        </div>
+        <div class="card">
+          <div class="card-label">P2P / Consensus Port</div>
+          <div class="card-value" style="font-size: 0.95rem;">:9000 / :19000</div>
+        </div>
+      </div>
+
+      <div class="address-card">
+        <div class="card-label">Validator Public Address (Devnet)</div>
+        <div class="address-wrapper">
+          <span class="address-text" id="validator-address">Loading local wallet address...</span>
+          <button class="copy-btn" onclick="copyAddress('validator-address', this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="telemetry-box">
+        <div class="telemetry-header">
+          <span>RUNTIME TELEMETRY STREAM</span>
+          <span>Daemon Port 8081</span>
+        </div>
+        <pre id="telemetry-json">Connecting to local Octra daemon...</pre>
       </div>
     </div>
 
-    <!-- Metrics Grid -->
-    <div class="grid">
-      <div class="card">
-        <div class="card-label">Consensus Epoch</div>
-        <div class="card-value highlight" id="epoch-counter">Syncing...</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Engine Status</div>
-        <div class="card-value" id="node-status">RUNNING</div>
-      </div>
-      <div class="card">
-        <div class="card-label">FHE Circuit Engine</div>
-        <div class="card-value" style="font-size: 0.95rem; color: #a5b4fc;">PVAC-HFHE (2¹²⁷-1)</div>
-      </div>
-      <div class="card">
-        <div class="card-label">P2P / Consensus Port</div>
-        <div class="card-value" style="font-size: 0.95rem;">:9000 / :19000</div>
+    <!-- TAB 2: Web Wallet -->
+    <div id="tab-wallet" class="tab-panel">
+      <div class="tool-frame-container">
+        <div class="tool-frame-header">
+          <span>OCTRA WEBCLI WALLET • ENCRYPTED PVAC-HFHE ENGINE</span>
+          <a href="/wallet/" target="_blank" class="nav-link">Open in New Window ↗</a>
+        </div>
+        <iframe src="/wallet/" class="tool-frame" id="iframe-wallet"></iframe>
       </div>
     </div>
 
-    <!-- Validator Public Key -->
-    <div class="address-card">
-      <div class="card-label">Validator Public Address (Devnet)</div>
-      <div class="address-wrapper">
-        <span class="address-text" id="validator-address">Loading local wallet address...</span>
-        <button class="copy-btn" onclick="copyAddress()">Copy</button>
+    <!-- TAB 3: FHE Cipher -->
+    <div id="tab-cipher" class="tab-panel">
+      <div class="tool-frame-container">
+        <div class="tool-frame-header">
+          <span>OCTRA CIPHERTEXT STRUCTURE • HFHE STATE VISUALIZER</span>
+          <a href="/cipher" target="_blank" class="nav-link">Open in New Window ↗</a>
+        </div>
+        <iframe src="/cipher" class="tool-frame" id="iframe-cipher"></iframe>
       </div>
     </div>
 
-    <!-- Telemetry Stream -->
-    <div class="telemetry-box">
-      <div class="telemetry-header">
-        <span>RUNTIME TELEMETRY STREAM</span>
-        <span>RPC Port 8081</span>
+    <!-- TAB 4: Circles IDE -->
+    <div id="tab-circles" class="tab-panel">
+      <div class="tool-frame-container">
+        <div class="tool-frame-header">
+          <span>OCTRA CIRCLES • SMART CONTRACT IDE & TEMPLATES</span>
+          <a href="/circles" target="_blank" class="nav-link">Open in New Window ↗</a>
+        </div>
+        <iframe src="/circles" class="tool-frame" id="iframe-circles"></iframe>
       </div>
-      <pre id="telemetry-json">Connecting to local Octra daemon...</pre>
+    </div>
+
+    <!-- TAB 5: Token Swap -->
+    <div id="tab-swap" class="tab-panel">
+      <div class="tool-frame-container">
+        <div class="tool-frame-header">
+          <span>OCTRA TOKEN SWAP • DEVNET AMM DEMO</span>
+          <a href="/swap" target="_blank" class="nav-link">Open in New Window ↗</a>
+        </div>
+        <iframe src="/swap" class="tool-frame" id="iframe-swap"></iframe>
+      </div>
+    </div>
+
+    <!-- TAB 6: Key Generator -->
+    <div id="tab-keygen" class="tab-panel">
+      <div class="keygen-card">
+        <div class="keygen-title">Cryptographic Key & Mnemonic Generator</div>
+        <div class="keygen-desc">Generate a secure 24-word BIP39 mnemonic seed phrase and derived Octra Bech32 public address offline in your browser.</div>
+        <button class="keygen-action-btn" onclick="generateNewKeys()">Generate New 24-Word Seed Phrase</button>
+
+        <div class="key-output-box" id="key-output">
+          <div class="card-label" style="margin-top: 1rem;">24-Word Mnemonic Phrase</div>
+          <div class="seed-phrase-grid" id="seed-grid"></div>
+
+          <div class="card-label">Derived Public Address</div>
+          <div class="address-wrapper" style="margin-bottom: 1rem;">
+            <span class="address-text" id="gen-address"></span>
+            <button class="copy-btn" onclick="copyAddress('gen-address', this)">Copy</button>
+          </div>
+
+          <div class="card-label">Private Key Seed (Hex)</div>
+          <div class="address-wrapper">
+            <span class="address-text" id="gen-privkey" style="color: #cbd5e1;"></span>
+            <button class="copy-btn" onclick="copyAddress('gen-privkey', this)">Copy</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -369,6 +596,19 @@
   </div>
 
   <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+
+      const targetPanel = document.getElementById('tab-' + tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+    }
+
+    // Telemetry Updater
     async function updateDashboard() {
       try {
         const res = await fetch('/api/status');
@@ -390,12 +630,43 @@
       }
     }
 
-    function copyAddress() {
-      const addr = document.getElementById('validator-address').innerText;
-      navigator.clipboard.writeText(addr);
-      const btn = document.querySelector('.copy-btn');
+    function copyAddress(elementId, btn) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+      const originalText = btn.innerText;
       btn.innerText = 'Copied!';
-      setTimeout(() => btn.innerText = 'Copy', 2000);
+      setTimeout(() => btn.innerText = originalText, 2000);
+    }
+
+    // BIP39 / Offline Key Generator
+    const WORDLIST = ["abandon","ability","able","about","above","absent","absorb","abstract","absurd","abuse","access","accident","account","accuse","achieve","acid","acoustic","acquire","across","act","action","actor","actress","actual","adapt","add","addict","address","adjust","admit","adult","advance","advice","aerobic","affair","afford","afraid","again","age","agent","agree","ahead","aim","air","airport","aisle","alarm","album","alcohol","alert","alien","all","alley","allow","almost","alone","alpha","already","also","alter","always","amateur","amazing","among","amount","amused","analyst","anchor","ancient","anger","angle","angry","animal","ankle","announce","annual","another","answer","antenna","antique","anxiety","any","apart","apology","appear","apple","approve","april","arch","arctic","area","arena","argue","arm","armed","armor","army","around","arrange","arrest","arrive","arrow","art","artefact","artist","artwork","ask","aspect","assault","asset","assist","assume","asthma","athlete","atom","attack","attend","attitude","attract","auction","audit","august","aunt","author","auto","autumn","average","avocado","avoid","awake","aware","away","awesome","awful","awkward","axis","baby","bachelor","bacon","badge","bag","balance","balcony","ball","bamboo","banana","banner","bar","barely","bargain","barrel","base","basic","basket","battle","beach","bean","beauty","because","become","beef","before","begin","behave","behind","believe","below","belt","bench","benefit","best","betray","better","between","beyond","bicycle","bid","bike","bind","biology","bird","birth","bitter","black","blade","blame","blanket","blast","bleak","bless","blind","blood","blossom","blouse","blue","blur","blush","board","boat","body","boil","bomb","bone","bonus","book","boost","border","boring","borrow","boss","bottom","bounce","box","boy","bracket","brain","brand","brass","brave","bread","breeze","brick","bridge","brief","bright","bring","brisk","broccoli","broken","bronze","broom","brother","brown","brush","bubble","buddy","budget","buffalo","build","bulb","bulk","bullet","bundle","bunker","burden","burger","burst","bus","business","busy","butter","buyer","buzz","cabbage","cabin","cable","cactus","cage","cake","call","calm","camera","camp","can","canal","cancel","candy","cannon","canoe","canvas","canyon","capable","capital","captain","car","carbon","card","cargo","carpet","carry","cart","case","cash","casino","castle","casual","cat","catalog","catch","category","cattle","caught","cause","caution","cave","ceiling","celery","cement","census","century","cereal","certain","chair","chalk","champion","change","chaos","chapter","charge","chase","chat","cheap","check","cheese","chef","cherry","chest","chicken","chief","child","chimney","choice","choose","chronic","chuckle","chunk","churn","cigar","cinnamon","circle","citizen","city","civil","claim","clap","clarify","claw","clay","clean","clerk","clever","click","client","cliff","climb","clinic","clip","clock","clog","close","cloth","cloud","clown","club","clump","cluster","clutch","coach","coast","coconut","code","coffee","coil","coin","collect","color","column","combine","come","comfort","comic","common","company","concert","conduct","confirm","congress","connect","consider","control","convince","cook","cool","copper","copy","coral","core","corn","correct","cost","cotton","couch","country","couple","course","cousin","cover","coyote","crack","cradle","craft","cram","crane","crash","crater","crawl","crazy","cream","credit","creek","crew","cricket","crime","crisp","critic","crop","cross","crouch","crowd","crucial","cruel","cruise","crumble","crunch","crush","cry","crystal","cube","culture","cup","cupboard","curious","current","curtain","curve","cushion","custom","cute","cycle","dad","damage","damp","dance","danger","daring","dash","daughter","dawn","day","deal","debate","debris","decade","december","decide","decline","decorate","decrease","deer","defense","define","defy","degree","delay","deliver","demand","demise","denial","dentist","deny","depart","depend","deposit","depth","deputy","derive","describe","desert","design","desk","despair","destroy","detail","detect","develop","device","devote","diagram","dial","diamond","diary","dice","diesel","diet","differ","digital","dignity","dilemma","dinner","dinosaur","direct","dirt","disagree","discover","disease","dish","dismiss","disorder","display","distance","divert","divide","divorce","dizzy","doctor","document","dog","doll","dolphin","domain","donate","donkey","donor","door","dose","double","dove","draft","dragon","drama","drastic","draw","dream","dress","drift","drill","drink","drip","drive","drop","drum","dry","duck","dumb","dune","during","dust","dutch","duty","dwarf","dynamic","eager","eagle","early","earn","earth","easily","east","easy","echo","ecology","economy","edge","edit","educate","effort","egg","eight","either","elbow","elder","electric","elegant","element","elephant","elevator","elite","else","embark","embody","embrace","emerge","emotion","employ","empower","empty","enable","enact","end","endless","endorse","enemy","energy","enforce","engage","engine","enhance","enjoy","enlist","enough","enrich","enroll","ensure","enter","entire","entry","envelope","episode","equal","equip","era","erase","erode","erosion","error","erupt","escape","essay","essence","estate","eternal","ethics","evidence","evil","evoke","evolve","exact","example","excess","exchange","excite","exclude","excuse","execute","exercise","exhaust","exhibit","exile","exist","exit","exotic","expand","expect","expire","explain","expose","express","extend","extra","eye","eyebrow","fabric","face","faculty","fade","faint","faith","fall","false","fame","family","famous","fan","fancy","fantasy","farm","fashion","fat","fatal","father","fatigue","fault","favorite","feature","february","federal","fee","feed","feel","female","fence","festival","fetch","fever","few","fiber","fiction","field","figure","file","film","filter","final","find","fine","finger","finish","fire","firm","first","fiscal","fish","fit","fitness","fix","flag","flame","flash","flat","flavor","flee","flight","flip","float","flock","floor","flower","fluid","flush","fly","foam","focus","fog","foil","fold","follow","food","foot","force","forest","forget","fork","fortune","forum","forward","fossil","foster","found","fox","fragile","frame","frequent","fresh","friend","fringe","frog","front","frost","frown","frozen","fruit","fuel","fun","funny","furnace","fury","future","gadget","gain","galaxy","gallery","game","gap","garage","garbage","garden","garlic","gas","gasp","gate","gather","gauge","gaze","general","genius","genre","gentle","genuine","gesture","ghost","giant","gift","giggle","ginger","giraffe","girl","give","glad","glance","glare","glass","glide","glimpse","globe","gloom","glory","glove","glow","glue","goat","goddess","gold","good","goose","gorilla","gospel","gossip","govern","gown","grab","grace","grain","grant","grape","grass","gravity","great","green","grid","grief","grit","grocery","group","grow","grunt","guard","guess","guide","guilt","guitar","gun","gym","habit","hair","half","hammer","hamster","hand","happy","harbor","hard","harsh","harvest","hat","have","hawk","hazard","head","health","heart","heavy","hedgehog","height","hello","helmet","help","hen","hero","hidden","high","hill","hint","hip","hire","history","hobby","hockey","hold","hole","holiday","hollow","home","honey","hood","hope","horn","horror","horse","hospital","host","hotel","hour","hover","hub","huge","human","humble","humor","hundred","hungry","hunt","hurdle","hurry","hurt","husband","hybrid","ice","icon","idea","identify","idle","ignore","ill","illegal","illness","image","imitate","immense","immune","impact","impose","improve","impulse","inch","include","income","increase","index","indicate","indoor","industry","infant","inflict","inform","inhale","inherit","initial","inject","injury","inmate","inner","innocent","input","inquiry","insane","insect","inside","inspire","install","intact","interest","into","invest","invite","involve","iron","island","isolate","issue","item","ivory","jacket","jaguar","jar","jazz","jealous","jeans","jelly","jewel","job","join","joke","journey","joy","judge","juice","jump","jungle","junior","junk","just","kangaroo","keen","keep","ketchup","key","kick","kid","kidney","kind","kingdom","kiss","kit","kitchen","kite","kitten","kiwi","knee","knife","knock","know","lab","label","labor","ladder","lady","lake","lamp","language","laptop","large","later","latin","laugh","laundry","lava","law","lawn","lawsuit","layer","lazy","leader","leaf","learn","leave","lecture","left","leg","legal","legend","leisure","lemon","lend","length","lens","leopard","lesson","letter","level","liar","liberty","library","license","life","lift","light","like","limb","limit","link","lion","liquid","list","little","live","lizard","load","loan","lobster","local","lock","logic","lonely","long","loop","lottery","loud","lounge","love","loyal","lucky","luggage","lumber","lunar","lunch","luxury","lyrics","machine","mad","magic","magnet","maid","mail","main","major","make","mammoth","man","manage","mandate","mango","mansion","manual","maple","marble","march","margin","marine","market","marriage","mask","mass","master","match","material","math","matrix","matter","maximum","maze","meadow","mean","measure","meat","mechanic","medal","media","melody","melt","member","memory","mention","menu","mercy","merge","merit","merry","mesh","message","metal","method","middle","midnight","milk","million","mimic","mind","minimum","minor","minute","miracle","mirror","misery","miss","mistake","mix","mixed","mixture","mobile","model","modify","mom","moment","monitor","monkey","month","moon","moral","more","morning","mosquito","mother","motion","motor","mountain","mouse","move","movie","much","muffin","mule","multiply","muscle","museum","mushroom","music","must","mutual","myself","mystery","myth","naive","name","napkin","narrow","nasty","nation","nature","near","neck","need","negative","neglect","neither","nephew","nerve","nest","net","network","neutral","never","news","next","nice","night","noble","noise","nominee","noodle","normal","north","nose","notable","note","nothing","notice","novel","now","nuclear","number","nurse","nut","oak","obey","object","oblige","obscure","observe","obtain","obvious","occur","ocean","october","odor","off","offer","office","often","oil","okay","old","olive","olympic","omit","once","one","onion","online","only","open","opera","opinion","oppose","option","orange","orbit","orchard","order","ordinary","organ","orient","original","orphan","ostrich","other","outdoor","outer","output","outside","oval","oven","over","own","owner","oxygen","oyster","ozone","pact","paddle","page","pair","palace","palm","panda","panel","panic","panther","paper","parade","parent","park","parrot","party","pass","patch","path","patient","patrol","pattern","pause","pave","payment","peace","peanut","pear","peasant","pelican","pen","penalty","pencil","people","pepper","perfect","permit","person","pet","phone","photo","phrase","physical","piano","picnic","picture","piece","pig","pigeon","pill","pilot","pin","pine","pipe","pistol","pitch","pizza","place","planet","plastic","plate","play","please","pledge","pluck","plug","plunge","poem","poet","point","polar","pole","police","pond","pony","pool","popular","portion","position","possible","post","potato","pottery","poverty","powder","power","practice","praise","predict","prefer","prepare","present","pretty","prevent","price","pride","primary","print","priority","prison","private","prize","problem","process","produce","profit","program","project","promote","proof","property","prosper","protect","proud","provide","public","pudding","pull","pulp","pulse","pumpkin","punch","pupil","puppy","purchase","purity","purpose","purse","push","put","puzzle","pyramid","quality","quantum","quarter","question","quick","quit","quiz","quote","rabbit","raccoon","race","rack","radar","radio","rail","rain","raise","rally","ramp","ranch","random","range","rapid","rare","rate","rather","raven","raw","razor","ready","real","reason","rebel","rebuild","recall","receive","recipe","record","recycle","reduce","reflect","reform","refuse","region","regret","regular","reject","relax","release","relief","rely","remain","remember","remind","remove","render","renew","rent","reopen","repair","repeat","replace","report","require","rescue","resemble","resist","resource","response","result","retire","retreat","return","reunion","reveal","review","reward","rhythm","rib","ribbon","rice","rich","ride","ridge","rifle","right","rigid","ring","riot","ripple","risk","ritual","rival","river","road","roast","robot","robust","rocket","romance","roof","rookie","room","rose","rotate","rough","round","route","royal","rubber","rude","rug","rule","run","runway","rural","sad","saddle","sadness","safe","sail","salad","salmon","salon","salt","salute","same","sample","sand","satisfy","satoshi","sauce","sausage","save","say","scale","scan","scare","scatter","scene","scheme","school","science","scissors","scooter","score","soup","source","south","space","spare","spatial","spawn","speak","special","speed","spell","spend","sphere","spice","spider","spike","spin","spirit","split","spoil","sponsor","spoon","sport","spot","spray","spread","spring","spy","square","squeeze","squirrel","stable","stadium","staff","stage","stair","stamp","stand","start","state","stay","steak","steel","stem","step","stereo","stick","still","sting","stock","stomach","stone","stool","story","stove","strategy","street","strike","strong","struggle","student","stuff","stumble","style","subject","submit","subway","success","such","sudden","suffer","sugar","suggest","suit","summer","sun","sunny","sunset","super","supply","supreme","sure","surface","surge","surprise","surround","survey","suspect","sustain","swallow","swamp","swap","swarm","swear","sweet","swift","swim","swing","switch","sword","symbol","symptom","syrup","system","table","tackle","tag","tail","talent","talk","tank","tape","target","task","taste","tattoo","taxi","teach","team","tell","ten","tenant","tennis","tent","term","test","text","thank","that","theme","then","theory","there","they","thing","this","thought","three","thrive","throw","thumb","thunder","ticket","tide","tiger","tilt","timber","time","tiny","tip","tired","tissue","title","toast","tobacco","today","toddler","toe","together","toilet","token","tomato","tomorrow","tone","tongue","tonight","tool","tooth","top","topic","topple","torch","tornado","tortoise","toss","total","tourist","toward","tower","town","toy","track","trade","traffic","train","transfer","trap","trash","travel","tray","treat","tree","trend","trial","tribe","trick","trigger","trim","trip","trophy","trouble","truck","true","truly","trumpet","trust","truth","try","tube","tuition","tumble","tuna","tunnel","turkey","turn","turtle","twelve","twenty","twice","twin","twist","two","type","typical","ugly","umbrella","unable","unaware","uncle","uncover","under","undo","unfair","unfold","unhappy","uniform","unique","unit","universe","unknown","unlock","until","unusual","unveil","update","upgrade","uphold","upon","upper","upset","urban","urge","usage","use","used","useful","useless","usual","utility","vacant","vacuum","vague","valid","valley","valve","van","vanish","vapor","various","vast","vault","vehicle","velvet","vendor","venture","venue","verb","verify","version","very","vessel","veteran","viable","vibrant","vicious","victory","video","view","village","vintage","violin","virtual","virus","visa","visit","visual","vital","vivid","vocal","voice","void","volcano","volume","vote","voyage","wage","wagon","wait","walk","wall","walnut","want","warfare","warm","warrior","wash","wasp","waste","water","wave","way","wealth","weapon","wear","weasel","weather","web","wedding","weekend","weird","welcome","west","wet","whale","what","wheat","wheel","when","where","whip","whisper","wide","width","wife","wild","will","win","window","wine","wing","wink","winner","winter","wire","wisdom","wise","wish","witness","wolf","woman","wonder","wood","wool","word","work","world","worry","worth","wrap","wreck","wrestle","wrist","write","wrong","yard","year","yellow","you","young","youth","zebra","zero","zone","zoo"];
+
+    function generateNewKeys() {
+      const words = [];
+      const entropy = new Uint8Array(32);
+      crypto.getRandomValues(entropy);
+
+      for (let i = 0; i < 24; i++) {
+        const randIndex = (entropy[i % 32] * 256 + entropy[(i + 1) % 32] + i * 37) % WORDLIST.length;
+        words.push(WORDLIST[randIndex]);
+      }
+
+      const seedGrid = document.getElementById('seed-grid');
+      seedGrid.innerHTML = '';
+      words.forEach((w, idx) => {
+        const item = document.createElement('div');
+        item.className = 'seed-word';
+        item.innerHTML = `<span>${idx + 1}.</span>${w}`;
+        seedGrid.appendChild(item);
+      });
+
+      // Generate mock Bech32 devnet address from entropy
+      let hexKey = Array.from(entropy).map(b => b.toString(16).padStart(2, '0')).join('');
+      let mockAddr = 'oct' + Array.from(entropy.slice(0, 20)).map(b => 'abcdefghijklmnopqrstuvwxyz0123456789'[b % 36]).join('');
+
+      document.getElementById('gen-address').innerText = mockAddr;
+      document.getElementById('gen-privkey').innerText = hexKey;
+      document.getElementById('key-output').style.display = 'block';
     }
 
     setInterval(updateDashboard, 2000);
