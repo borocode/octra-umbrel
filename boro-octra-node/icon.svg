@@ -1,18 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <linearGradient id="octra-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0c14" />
-      <stop offset="100%" stop-color="#040508" />
-    </linearGradient>
-    <filter id="subtle-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-
-  <!-- Umbrel Rounded App Icon Container -->
-  <rect width="512" height="512" rx="112" fill="url(#octra-bg)" stroke="#1a2038" stroke-width="4"/>
+  <!-- Clean White Umbrel App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="6"/>
 
   <!-- Official Octra Network Cobalt Blue Circle -->
-  <circle cx="256" cy="256" r="160" fill="none" stroke="#0000EB" stroke-width="64" stroke-linecap="round" filter="url(#subtle-glow)" />
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#0000EB" stroke-width="72" stroke-linecap="round" />
 </svg>

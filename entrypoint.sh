@@ -39,12 +39,39 @@ echo "📊 Launching Web Dashboard on port 8080..."
 python3 /opt/octra/dashboard/server.py &
 DASHBOARD_PID=$!
 
-# Handle graceful shutdown
-trap 'echo "🛑 Stopping Octra Node..."; kill $DASHBOARD_PID $NODE_PID 2>/dev/null; exit 0' SIGTERM SIGINT
+# Graceful shutdown handler
+shutdown_node() {
+  echo "🛑 Received shutdown signal. Gracefully stopping Octra Node..."
+  if [ -n "$NODE_PID" ]; then
+    kill -TERM "$NODE_PID" 2>/dev/null || true
+    wait "$NODE_PID" 2>/dev/null || true
+  fi
+  kill "$DASHBOARD_PID" 2>/dev/null || true
+  exit 0
+}
 
-echo "🚀 Executing Octra Node binary in role: $NODE_ROLE..."
+trap shutdown_node SIGTERM SIGINT
 
-/opt/octra/bin/octra_node.exe &
+# Self-healing Node supervisor loop
+while true; do
+  echo "🚀 Executing Octra Node binary in role: $NODE_ROLE..."
+  /opt/octra/bin/octra_node.exe &
+  NODE_PID=$!
 
-NODE_PID=$!
-wait $NODE_PID
+  # Wait for node process
+  set +e
+  wait $NODE_PID
+  EXIT_CODE=$?
+  set -e
+
+  echo "⚠️ Octra Node exited with code $EXIT_CODE."
+  
+  # If node crashed due to corrupted store or sudden shutdown, heal store and restart
+  if [ $EXIT_CODE -ne 0 ]; then
+    echo "🔧 Performing automatic store heal and reinitializing genesis consensus..."
+    rm -rf "$DATA_DIR/irmin_store" "$DATA_DIR/chaindata" 2>/dev/null || true
+    sleep 2
+  else
+    break
+  fi
+done

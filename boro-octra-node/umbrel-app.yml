@@ -3,7 +3,7 @@ id: boro-octra-node
 name: Octra Lite Node
 tagline: Contribute sovereign FHE compute and validation to the Octra Network
 category: Crypto
-version: "1.0.6"
+version: "1.0.7"
 port: 8098
 icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
@@ -27,7 +27,7 @@ repo: https://github.com/octra-labs/lite_node
 support: https://t.me/octranetwork
 gallery: []
 releaseNotes: >-
-  Version 1.0.6: Polished dashboard UI adopting the official octra.org minimalist design system, Inter typography, 1-click address copy, and explorer navigation links.
+  Version 1.0.7: High-contrast Octra cobalt-blue on white icon and self-healing store supervisor for crash resilience.
 dependencies: []
 path: ""
 defaultUsername: ""
