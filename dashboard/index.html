@@ -3,229 +3,403 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Octra Lite Node // Umbrel Dashboard</title>
+  <title>octra | lite node</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #06080f;
-      --card-bg: #0c101b;
-      --border: #18223c;
-      --blue: #0055ff;
-      --blue-dim: #0033aa;
-      --text: #e2e8f0;
-      --text-muted: #64748b;
+      --bg: #000000;
+      --card-bg: #090a0f;
+      --card-hover: #0f131f;
+      --border: #171b29;
+      --border-focus: #0000EB;
+      --blue: #0000EB;
+      --blue-glow: #2b45ff;
+      --cyan: #38bdf8;
+      --text: #f1f5f9;
+      --text-muted: #8492a6;
+      --text-dim: #475569;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 860px;
     }
 
+    /* Header matching octra.org */
     header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.5rem;
-      margin-bottom: 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
     }
 
-    .title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 1px;
-    }
-
-    .status-badge {
-      background: rgba(0, 85, 255, 0.12);
-      border: 1px solid var(--blue);
-      color: #38bdf8;
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
+    .brand {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.9rem;
+      text-decoration: none;
+      color: var(--text);
     }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: #38bdf8;
+    .brand svg {
+      transition: transform 0.3s ease;
+    }
+
+    .brand:hover svg {
+      transform: scale(1.05);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .brand-title .node-tag {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--cyan);
+    }
+
+    /* Hero / Status Section */
+    .hero {
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--cyan);
+    }
+
+    .status-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0, 0, 235, 0.12);
+      border: 1px solid rgba(0, 0, 235, 0.4);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--cyan);
       border-radius: 50%;
-      box-shadow: 0 0 8px #38bdf8;
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 10px var(--cyan);
+      animation: pulse 2s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
     }
 
+    /* Metric Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 1.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      border-color: rgba(0, 0, 235, 0.4);
     }
 
     .card-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
       margin-bottom: 0.5rem;
     }
 
     .card-value {
-      font-size: 1.1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
       color: #ffffff;
     }
 
-    .logs-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.2rem;
-      margin-top: 1rem;
+    .card-value.highlight {
+      color: var(--cyan);
     }
 
-    .logs-header {
-      color: #38bdf8;
-      font-size: 0.9rem;
-      font-weight: bold;
-      margin-bottom: 0.8rem;
+    /* Address Card with Copy */
+    .address-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .address-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      background: #000000;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    .address-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--cyan);
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: rgba(0, 0, 235, 0.2);
+      border: 1px solid var(--blue);
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--blue);
+    }
+
+    /* Telemetry Box */
+    .telemetry-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
     pre {
-      background: #04060a;
-      border: 1px solid #141c2e;
+      background: #000000;
+      border: 1px solid var(--border);
       padding: 1rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      color: #38bdf8;
-      max-height: 200px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      max-height: 220px;
       overflow-y: auto;
       white-space: pre-wrap;
     }
 
+    /* Footer matching octra.org */
     footer {
-      margin-top: 3rem;
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 0.8rem;
-      color: var(--text-muted);
-      text-align: center;
+      color: var(--text-dim);
+      width: 100%;
     }
 
     footer a {
-      color: var(--blue);
+      color: var(--text-muted);
       text-decoration: none;
+      transition: color 0.2s;
     }
 
     footer a:hover {
-      color: #38bdf8;
+      color: var(--cyan);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
+    <!-- Header -->
     <header>
-      <div class="title">⚡ OCTRA // LITE NODE</div>
-      <div class="status-badge">
-        <span class="dot"></span>
-        <span id="node-status">OPERATIONAL</span>
+      <div class="brand">
+        <!-- Official Octra SVG Ring -->
+        <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="21" stroke="#0000EB" stroke-width="8"/>
+        </svg>
+        <div class="brand-title">
+          octra <span class="node-tag">// lite node</span>
+        </div>
       </div>
+      <nav class="nav-links">
+        <a href="https://octrascan.io" target="_blank" class="nav-link">network explorer</a>
+        <a href="https://docs.octra.org" target="_blank" class="nav-link">docs</a>
+        <a href="https://sandbox.octra.org" target="_blank" class="nav-link">sandbox</a>
+        <a href="https://github.com/octra-labs" target="_blank" class="nav-link">github</a>
+      </nav>
     </header>
 
+    <!-- Hero / Tagline -->
+    <div class="hero">
+      <h1>octra is universal encrypted compute for <span>blockchain, ai and apps</span></h1>
+      <div class="status-bar">
+        <div class="pulse-dot"></div>
+        <span id="status-badge">DEVNET CONSENSUS • OPERATIONAL</span>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
     <div class="grid">
       <div class="card">
         <div class="card-label">Consensus Epoch</div>
-        <div class="card-value" style="color: #38bdf8;" id="node-epoch">Syncing...</div>
+        <div class="card-value highlight" id="epoch-counter">Syncing...</div>
       </div>
       <div class="card">
-        <div class="card-label">Node Status</div>
-        <div class="card-value" id="node-status-text">RUNNING</div>
+        <div class="card-label">Engine Status</div>
+        <div class="card-value" id="node-status">RUNNING</div>
       </div>
       <div class="card">
-        <div class="card-label">Network / Version</div>
-        <div class="card-value" id="node-version">Devnet (v3.0.0)</div>
+        <div class="card-label">FHE Circuit Engine</div>
+        <div class="card-value" style="font-size: 0.95rem; color: #a5b4fc;">PVAC-HFHE (2¹²⁷-1)</div>
       </div>
       <div class="card">
-        <div class="card-label">Consensus Port</div>
-        <div class="card-value">:19000 (P2P: :9000)</div>
+        <div class="card-label">P2P / Consensus Port</div>
+        <div class="card-value" style="font-size: 0.95rem;">:9000 / :19000</div>
       </div>
     </div>
 
-    <div class="card" style="margin-bottom: 1rem;">
-      <div class="card-label">Validator Public Address</div>
-      <div class="card-value" style="font-size: 0.85rem; word-break: break-all; color: #38bdf8;" id="validator-addr">Loading...</div>
-    </div>
-
-    <div class="logs-box">
-      <div class="logs-header">
-        <span>RUNTIME TELEMETRY</span>
-        <span style="font-size: 0.75rem; color: #888;">Port 8080 (RPC Proxy)</span>
+    <!-- Validator Public Key -->
+    <div class="address-card">
+      <div class="card-label">Validator Public Address (Devnet)</div>
+      <div class="address-wrapper">
+        <span class="address-text" id="validator-address">Loading local wallet address...</span>
+        <button class="copy-btn" onclick="copyAddress()">Copy</button>
       </div>
-      <pre id="telemetry-json">Loading node telemetry from internal daemon...</pre>
     </div>
 
+    <!-- Telemetry Stream -->
+    <div class="telemetry-box">
+      <div class="telemetry-header">
+        <span>RUNTIME TELEMETRY STREAM</span>
+        <span>RPC Port 8081</span>
+      </div>
+      <pre id="telemetry-json">Connecting to local Octra daemon...</pre>
+    </div>
+
+    <!-- Footer -->
     <footer>
-      Octra Network • FHE Layer 1 • Packaged for Umbrel by <a href="https://github.com/borocode" target="_blank">Boro Labs</a>
+      <div>© 2026 octra labs</div>
+      <div>packaged for umbrel by <a href="https://github.com/borocode" target="_blank">boro labs</a></div>
     </footer>
   </div>
 
   <script>
-    async function updateStatus() {
+    async function updateDashboard() {
       try {
         const res = await fetch('/api/status');
         const data = await res.json();
+
         if (data.epoch !== undefined) {
-          document.getElementById('node-epoch').innerText = '#' + data.epoch;
+          document.getElementById('epoch-counter').innerText = '#' + data.epoch;
+          document.getElementById('status-badge').innerText = `DEVNET CONSENSUS • EPOCH #${data.epoch}`;
         }
         if (data.status) {
-          document.getElementById('node-status-text').innerText = data.status.toUpperCase();
           document.getElementById('node-status').innerText = data.status.toUpperCase();
         }
-        if (data.version) {
-          document.getElementById('node-version').innerText = 'Devnet (v' + data.version + ')';
-        }
         if (data.validator) {
-          document.getElementById('validator-addr').innerText = data.validator;
+          document.getElementById('validator-address').innerText = data.validator;
         }
         document.getElementById('telemetry-json').innerText = JSON.stringify(data, null, 2);
       } catch (err) {
-        document.getElementById('node-status').innerText = 'INITIALIZING';
+        document.getElementById('node-status').innerText = 'CONNECTING';
       }
     }
 
-    setInterval(updateStatus, 2000);
-    updateStatus();
+    function copyAddress() {
+      const addr = document.getElementById('validator-address').innerText;
+      navigator.clipboard.writeText(addr);
+      const btn = document.querySelector('.copy-btn');
+      btn.innerText = 'Copied!';
+      setTimeout(() => btn.innerText = 'Copy', 2000);
+    }
+
+    setInterval(updateDashboard, 2000);
+    updateDashboard();
   </script>
 </body>
 </html>
