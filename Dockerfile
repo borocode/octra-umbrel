@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsqlite3-dev \
     libev-dev \
     libssl-dev \
+    libffi-dev \
+    liblmdb-dev \
     m4 \
     patch \
     unzip \
@@ -31,10 +33,10 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /build/octra
 RUN git clone --branch main --single-branch https://github.com/octra-labs/lite_node.git .
 
-# Initialize OPAM and install OCaml 4.14.2 + Dune
+# Initialize OPAM, install OCaml 4.14.2 and all project dependencies
 RUN opam init --disable-sandboxing --bare -a -y \
     && opam switch create ocaml-system 4.14.2 \
-    && opam install -y dune
+    && opam install -y . --deps-only
 
 # Build MCL cryptography library (ensure obj and lib directories exist)
 WORKDIR /build/octra/mcl
@@ -63,6 +65,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsqlite3-0 \
     libev4 \
     libssl3 \
+    liblmdb0 \
     curl \
     python3 \
     procps \
