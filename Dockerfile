@@ -4,11 +4,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV OPAMROOT=/root/.opam
 ENV OPAMYES=1
 
-# Install build prerequisites
+# Install build prerequisites (including clang and llvm for ARM64 MCL assembly compilation)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     git \
     build-essential \
+    clang \
+    llvm \
+    lld \
     cmake \
     pkg-config \
     libgmp-dev \
