@@ -60,8 +60,8 @@ RUN opam exec -- dune build --profile release \
 # Clone and build Octra Wallet (webcli)
 WORKDIR /build/webcli
 RUN git clone --branch main --single-branch https://github.com/octra-labs/webcli.git . \
-    && sed -i 's/static bool is_loopback_host(std::string host, int port) {/static bool is_loopback_host(std::string host, int port) {\n    const char* allow_lan = std::getenv("OCTRA_ALLOW_LAN");\n    if (allow_lan \&\& *allow_lan == '\''1\'') return true;/' main.cpp \
-    && sed -i 's/static bool is_allowed_webcli_origin(const std::string& origin, int port) {/static bool is_allowed_webcli_origin(const std::string& origin, int port) {\n    const char* allow_lan = std::getenv("OCTRA_ALLOW_LAN");\n    if (allow_lan \&\& *allow_lan == '\''1\'') return true;/' main.cpp \
+    && sed -i 's/static bool is_loopback_host(std::string host, int port) {/static bool is_loopback_host(std::string host, int port) {\n    if (std::getenv("OCTRA_ALLOW_LAN")) return true;/' main.cpp \
+    && sed -i 's/static bool is_allowed_webcli_origin(const std::string& origin, int port) {/static bool is_allowed_webcli_origin(const std::string& origin, int port) {\n    if (std::getenv("OCTRA_ALLOW_LAN")) return true;/' main.cpp \
     && OCTRA_SKIP_AUTOSETUP=1 make -j$(nproc)
 
 # ==============================================================================
