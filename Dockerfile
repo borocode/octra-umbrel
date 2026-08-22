@@ -96,6 +96,4 @@ EXPOSE 8080 9000 19000
 
 VOLUME ["/var/lib/octra"]
 
-USER octra
-
 ENTRYPOINT ["/opt/octra/entrypoint.sh"]
