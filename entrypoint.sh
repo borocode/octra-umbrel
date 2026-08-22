@@ -22,9 +22,11 @@ if [ ! -f "$DATA_DIR/nodes.config" ]; then
 fi
 
 # Clean up any partial/interrupted initial store from an earlier crashed run
-if [ -d "$DATA_DIR/irmin_store" ] && [ ! -f "$DATA_DIR/irmin_store/HEAD.json" ]; then
-  echo "⚠️ Detected incomplete store from interrupted run. Reinitializing fresh store..."
-  rm -rf "$DATA_DIR/irmin_store"
+if [ -d "$DATA_DIR/epochlog" ] || [ -d "$DATA_DIR/irmin_store" ]; then
+  if [ ! -f "$DATA_DIR/irmin_store/HEAD.json" ]; then
+    echo "⚠️ Detected incomplete store from interrupted run. Reinitializing fresh store..."
+    rm -rf "$DATA_DIR/irmin_store" "$DATA_DIR/epochlog" "$DATA_DIR/txlog" "$DATA_DIR/index" "$DATA_DIR/chaindata" 2>/dev/null || true
+  fi
 fi
 
 # Set node daemon environment variables
@@ -66,10 +68,10 @@ while true; do
 
   echo "⚠️ Octra Node exited with code $EXIT_CODE."
   
-  # If node crashed due to corrupted store or sudden shutdown, heal store and restart
+  # If node crashed due to corrupted store or sudden shutdown, heal all store components and restart
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "🔧 Performing automatic store heal and reinitializing genesis consensus..."
-    rm -rf "$DATA_DIR/irmin_store" "$DATA_DIR/chaindata" 2>/dev/null || true
+    echo "🔧 Performing complete store heal and reinitializing genesis consensus..."
+    rm -rf "$DATA_DIR/irmin_store" "$DATA_DIR/epochlog" "$DATA_DIR/txlog" "$DATA_DIR/index" "$DATA_DIR/chaindata" 2>/dev/null || true
     sleep 2
   else
     break
