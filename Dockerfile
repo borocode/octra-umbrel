@@ -57,10 +57,13 @@ RUN opam exec -- dune build --profile release \
     bin/octra_state_sync_manifest.exe \
     bin/bft_control_tx.exe
 
+# Copy patch script for webcli
+COPY patch_webcli.py /build/patch_webcli.py
+
 # Clone and build Octra Wallet (webcli)
 WORKDIR /build/webcli
 RUN git clone --branch main --single-branch https://github.com/octra-labs/webcli.git . \
-    && python3 -c 'p="main.cpp"; c=open(p).read(); c=c.replace("static bool is_loopback_host(std::string host, int port) {", "static bool is_loopback_host(std::string host, int port) {\\n    if (std::getenv(\"OCTRA_ALLOW_LAN\")) return true;"); c=c.replace("static bool is_allowed_webcli_origin(const std::string& origin, int port) {", "static bool is_allowed_webcli_origin(const std::string& origin, int port) {\\n    if (std::getenv(\"OCTRA_ALLOW_LAN\")) return true;"); open(p, "w").write(c)' \
+    && python3 /build/patch_webcli.py main.cpp \
     && OCTRA_SKIP_AUTOSETUP=1 make -j$(nproc)
 
 # ==============================================================================
