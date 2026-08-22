@@ -36,9 +36,10 @@ RUN opam init --disable-sandboxing --bare -a -y \
     && opam switch create ocaml-system 4.14.2 \
     && opam install -y dune
 
-# Build MCL cryptography library
+# Build MCL cryptography library (ensure obj and lib directories exist)
 WORKDIR /build/octra/mcl
-RUN make -j$(nproc) MCL_FP_BIT=256 MCL_FR_BIT=256 lib/libmcl.a
+RUN mkdir -p obj lib \
+    && make -j$(nproc) MCL_FP_BIT=256 MCL_FR_BIT=256 lib/libmcl.a
 
 # Build Octra Node Binaries
 WORKDIR /build/octra
