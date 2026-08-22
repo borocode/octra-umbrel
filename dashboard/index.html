@@ -9,17 +9,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #000000;
-      --card-bg: #090a0f;
-      --card-hover: #0f131f;
-      --border: #171b29;
-      --border-focus: #0000EB;
-      --blue: #0000EB;
-      --blue-glow: #2b45ff;
-      --cyan: #38bdf8;
-      --text: #f1f5f9;
-      --text-muted: #8492a6;
-      --text-dim: #475569;
+      --bg: #FFFFFF;
+      --bg-subtle: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --card-hover: #F8FAFC;
+      --border: #E2E8F0;
+      --border-dark: #CBD5E1;
+      --blue: #0052FF;
+      --blue-hover: #0045e6;
+      --blue-light: #EFF6FF;
+      --blue-border: #BFDBFE;
+      --cyan: #0284C7;
+      --text: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
     }
 
     * {
@@ -29,20 +36,20 @@
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-subtle);
       color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1.2rem;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
       width: 100%;
-      max-width: 980px;
+      max-width: 1060px;
     }
 
     /* Header matching octra.org */
@@ -50,9 +57,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 1.2rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
     }
 
     .brand {
@@ -72,17 +79,18 @@
     }
 
     .brand-title {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.5px;
       display: flex;
       align-items: baseline;
-      gap: 0.4rem;
+      gap: 0.5rem;
+      color: var(--text);
     }
 
     .brand-title .node-tag {
-      font-size: 0.8rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       color: var(--text-muted);
       letter-spacing: 0;
     }
@@ -90,56 +98,60 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1.4rem;
     }
 
     .nav-link {
       font-size: 0.85rem;
+      font-weight: 500;
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-link:hover {
-      color: var(--cyan);
+      color: var(--blue);
     }
 
-    /* Suite Tabs */
+    /* Navigation Tabs */
     .tab-bar {
       display: flex;
-      flex-wrap: wrap;
       gap: 0.5rem;
-      background: var(--card-bg);
+      background: #FFFFFF;
+      padding: 0.35rem;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      padding: 0.4rem;
-      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 1.8rem;
+      overflow-x: auto;
     }
 
     .tab-btn {
       background: transparent;
       border: 1px solid transparent;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      padding: 0.5rem 0.9rem;
-      border-radius: 6px;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 500;
+      padding: 0.6rem 1.1rem;
+      border-radius: 7px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
     .tab-btn:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
+      color: var(--blue);
+      background: var(--blue-light);
     }
 
     .tab-btn.active {
-      background: rgba(0, 0, 235, 0.2);
-      border-color: rgba(0, 0, 235, 0.6);
-      color: #ffffff;
+      background: var(--blue-light);
+      color: var(--blue);
+      border-color: var(--blue-border);
       font-weight: 600;
     }
 
@@ -150,146 +162,160 @@
 
     .tab-panel.active {
       display: block;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Hero / Status Section */
     .hero {
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
     }
 
     .hero h1 {
-      font-size: 1.4rem;
-      font-weight: 500;
-      line-height: 1.4;
-      color: var(--text);
-      letter-spacing: -0.5px;
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      line-height: 1.35;
       margin-bottom: 0.8rem;
+      color: var(--text);
     }
 
     .hero h1 span {
-      color: var(--cyan);
+      color: var(--blue);
     }
 
     .status-bar {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      background: rgba(0, 0, 235, 0.12);
-      border: 1px solid rgba(0, 0, 235, 0.4);
-      padding: 0.35rem 0.85rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--blue-light);
+      border: 1px solid var(--blue-border);
       border-radius: 9999px;
-      font-size: 0.8rem;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--cyan);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--blue);
     }
 
     .pulse-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--cyan);
+      width: 8px;
+      height: 8px;
+      background-color: var(--blue);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--cyan);
-      animation: pulse 2s infinite ease-in-out;
+      box-shadow: 0 0 0 0 rgba(0, 82, 255, 0.5);
+      animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.85); }
+      0% { box-shadow: 0 0 0 0 rgba(0, 82, 255, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(0, 82, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 82, 255, 0); }
     }
 
-    /* Metric Grid */
+    /* Metrics Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.2rem;
-      transition: all 0.2s ease;
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
-      background: var(--card-hover);
-      border-color: rgba(0, 0, 235, 0.4);
+      border-color: var(--blue-border);
+      box-shadow: var(--shadow-md);
     }
 
     .card-label {
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     .card-value {
-      font-size: 1.2rem;
-      font-weight: 600;
       font-family: 'JetBrains Mono', monospace;
-      color: #ffffff;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--text);
     }
 
     .card-value.highlight {
-      color: var(--cyan);
+      color: var(--blue);
     }
 
-    /* Address Card with Copy */
+    /* Validator Address Section */
     .address-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.2rem;
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
     }
 
     .address-wrapper {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: #000000;
+      justify-content: space-between;
+      background: var(--bg-subtle);
       border: 1px solid var(--border);
-      padding: 0.6rem 0.8rem;
-      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      border-radius: 7px;
+      margin-top: 0.6rem;
+      gap: 1rem;
     }
 
     .address-text {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--cyan);
+      font-size: 0.85rem;
+      color: var(--text);
       word-break: break-all;
     }
 
     .copy-btn {
-      background: rgba(0, 0, 235, 0.2);
-      border: 1px solid var(--blue);
-      color: #ffffff;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
+      font-weight: 600;
+      padding: 0.45rem 0.8rem;
+      border-radius: 6px;
       cursor: pointer;
-      margin-left: 0.8rem;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
     }
 
     .copy-btn:hover {
-      background: var(--blue);
+      color: var(--blue);
+      border-color: var(--blue);
+      background: var(--blue-light);
     }
 
-    /* Telemetry Box */
+    /* Telemetry Log Box */
     .telemetry-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.2rem;
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
     }
 
@@ -299,121 +325,135 @@
       align-items: center;
       margin-bottom: 0.8rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--text-muted);
     }
 
     pre {
-      background: #000000;
-      border: 1px solid var(--border);
-      padding: 1rem;
-      border-radius: 6px;
+      background: #0A0F1D;
+      border: 1px solid #1E293B;
+      padding: 1.1rem;
+      border-radius: 7px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: #94a3b8;
-      max-height: 220px;
+      font-size: 0.8rem;
+      color: #38BDF8;
+      max-height: 240px;
       overflow-y: auto;
       white-space: pre-wrap;
+      line-height: 1.5;
     }
 
     /* Embedded Tool Frames */
     .tool-frame-container {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
     }
 
     .tool-frame-header {
-      background: #05060a;
+      background: #FFFFFF;
       border-bottom: 1px solid var(--border);
-      padding: 0.6rem 1rem;
+      padding: 0.75rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
     }
 
     .tool-frame {
       width: 100%;
-      height: 720px;
+      height: 750px;
       border: none;
-      background: #ffffff;
+      background: #FFFFFF;
+      display: block;
     }
 
     /* Key Generator Styles */
     .keygen-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
+      border-radius: 10px;
+      padding: 1.6rem;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
     }
 
     .keygen-title {
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 0.4rem;
       color: var(--text);
     }
 
     .keygen-desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
-      line-height: 1.5;
+      margin-bottom: 1.4rem;
+      line-height: 1.55;
     }
 
     .keygen-action-btn {
       background: var(--blue);
-      color: #ffffff;
+      color: #FFFFFF;
       border: none;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.85rem;
       font-weight: 600;
-      padding: 0.7rem 1.4rem;
-      border-radius: 6px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 7px;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: var(--shadow-sm);
     }
 
     .keygen-action-btn:hover {
-      opacity: 0.9;
+      background: var(--blue-hover);
+    }
+
+    .keygen-action-btn:active {
+      transform: scale(0.99);
     }
 
     .key-output-box {
-      margin-top: 1.5rem;
+      margin-top: 1.6rem;
       display: none;
     }
 
     .seed-phrase-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
       gap: 0.6rem;
-      background: #000000;
+      background: var(--bg-subtle);
       border: 1px solid var(--border);
-      padding: 1rem;
-      border-radius: 6px;
-      margin-top: 0.8rem;
-      margin-bottom: 1rem;
+      padding: 1.1rem;
+      border-radius: 8px;
+      margin-top: 0.9rem;
+      margin-bottom: 1.2rem;
     }
 
     .seed-word {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--cyan);
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.35rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: #FFFFFF;
+      padding: 0.45rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
 
     .seed-word span {
       color: var(--text-dim);
-      margin-right: 0.3rem;
+      font-weight: 400;
+      margin-right: 0.4rem;
     }
 
     /* Footer matching octra.org */
@@ -424,7 +464,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-dim);
       width: 100%;
     }
@@ -436,7 +476,7 @@
     }
 
     footer a:hover {
-      color: var(--cyan);
+      color: var(--blue);
     }
   </style>
 </head>
@@ -448,21 +488,23 @@
       <div class="brand">
         <!-- Official Octra SVG Ring -->
         <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="25" cy="25" r="21" stroke="#0000EB" stroke-width="8"/>
+          <circle cx="25" cy="25" r="18" stroke="#0052FF" stroke-width="6" fill="none"/>
+          <circle cx="25" cy="25" r="8" fill="#0052FF"/>
         </svg>
         <div class="brand-title">
-          octra <span class="node-tag">// node & wallet suite</span>
+          octra
+          <span class="node-tag">/ node & wallet suite</span>
         </div>
       </div>
-      <nav class="nav-links">
-        <a href="https://octrascan.io" target="_blank" class="nav-link">network explorer</a>
+
+      <div class="nav-links">
+        <a href="https://octra.org" target="_blank" class="nav-link">octra.org ↗</a>
         <a href="https://docs.octra.org" target="_blank" class="nav-link">docs</a>
-        <a href="https://sandbox.octra.org" target="_blank" class="nav-link">sandbox</a>
         <a href="https://github.com/octra-labs" target="_blank" class="nav-link">github</a>
-      </nav>
+      </div>
     </header>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tab Bar -->
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab('node')">🔵 Node Telemetry</button>
       <button class="tab-btn" onclick="switchTab('wallet')">👛 Web Wallet</button>
@@ -493,7 +535,7 @@
         </div>
         <div class="card">
           <div class="card-label">FHE Circuit Engine</div>
-          <div class="card-value" style="font-size: 0.95rem; color: #a5b4fc;">PVAC-HFHE (2¹²⁷-1)</div>
+          <div class="card-value" style="font-size: 0.95rem; color: #0284C7;">PVAC-HFHE (2¹²⁷-1)</div>
         </div>
         <div class="card">
           <div class="card-label">P2P / Consensus Port</div>
@@ -534,9 +576,9 @@
       <div class="tool-frame-container">
         <div class="tool-frame-header">
           <span>OCTRA CIPHERTEXT STRUCTURE • HFHE STATE VISUALIZER</span>
-          <a href="/cipher" target="_blank" class="nav-link">Open in New Window ↗</a>
+          <a href="/cipher.html" target="_blank" class="nav-link">Open in New Window ↗</a>
         </div>
-        <iframe src="/cipher" class="tool-frame" id="iframe-cipher"></iframe>
+        <iframe src="/cipher.html" class="tool-frame" id="iframe-cipher"></iframe>
       </div>
     </div>
 
@@ -545,9 +587,9 @@
       <div class="tool-frame-container">
         <div class="tool-frame-header">
           <span>OCTRA CIRCLES • SMART CONTRACT IDE & TEMPLATES</span>
-          <a href="/circles" target="_blank" class="nav-link">Open in New Window ↗</a>
+          <a href="/circles.html" target="_blank" class="nav-link">Open in New Window ↗</a>
         </div>
-        <iframe src="/circles" class="tool-frame" id="iframe-circles"></iframe>
+        <iframe src="/circles.html" class="tool-frame" id="iframe-circles"></iframe>
       </div>
     </div>
 
@@ -556,33 +598,29 @@
       <div class="tool-frame-container">
         <div class="tool-frame-header">
           <span>OCTRA TOKEN SWAP • DEVNET AMM DEMO</span>
-          <a href="/swap" target="_blank" class="nav-link">Open in New Window ↗</a>
+          <a href="/swap.html" target="_blank" class="nav-link">Open in New Window ↗</a>
         </div>
-        <iframe src="/swap" class="tool-frame" id="iframe-swap"></iframe>
+        <iframe src="/swap.html" class="tool-frame" id="iframe-swap"></iframe>
       </div>
     </div>
 
-    <!-- TAB 6: Key Generator -->
+    <!-- TAB 6: BIP39 Keygen -->
     <div id="tab-keygen" class="tab-panel">
       <div class="keygen-card">
         <div class="keygen-title">Cryptographic Key & Mnemonic Generator</div>
-        <div class="keygen-desc">Generate a secure 24-word BIP39 mnemonic seed phrase and derived Octra Bech32 public address offline in your browser.</div>
-        <button class="keygen-action-btn" onclick="generateNewKeys()">Generate New 24-Word Seed Phrase</button>
+        <div class="keygen-desc">
+          Generate a secure 24-word BIP39 mnemonic seed phrase and derived Octra Bech32 public address offline in your browser.
+        </div>
+        <button class="keygen-action-btn" onclick="generateKeypair()">Generate New 24-Word Seed Phrase</button>
 
-        <div class="key-output-box" id="key-output">
-          <div class="card-label" style="margin-top: 1rem;">24-Word Mnemonic Phrase</div>
-          <div class="seed-phrase-grid" id="seed-grid"></div>
+        <div id="keygen-output" class="key-output-box">
+          <div class="card-label" style="margin-top: 1rem;">24-Word Recovery Phrase</div>
+          <div id="seed-grid" class="seed-phrase-grid"></div>
 
-          <div class="card-label">Derived Public Address</div>
+          <div class="card-label">Derived Octra Address</div>
           <div class="address-wrapper" style="margin-bottom: 1rem;">
-            <span class="address-text" id="gen-address"></span>
-            <button class="copy-btn" onclick="copyAddress('gen-address', this)">Copy</button>
-          </div>
-
-          <div class="card-label">Private Key Seed (Hex)</div>
-          <div class="address-wrapper">
-            <span class="address-text" id="gen-privkey" style="color: #cbd5e1;"></span>
-            <button class="copy-btn" onclick="copyAddress('gen-privkey', this)">Copy</button>
+            <span class="address-text" id="derived-address">-</span>
+            <button class="copy-btn" onclick="copyAddress('derived-address', this)">Copy</button>
           </div>
         </div>
       </div>
@@ -590,87 +628,143 @@
 
     <!-- Footer -->
     <footer>
-      <div>© 2026 octra labs</div>
-      <div>packaged for umbrel by <a href="https://github.com/borocode" target="_blank">boro labs</a></div>
+      <span>© 2026 octra labs</span>
+      <span>packaged for umbrel by <strong>boro labs</strong></span>
     </footer>
   </div>
 
   <script>
-    // Tab Switching
+    // Tab switching
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
 
-      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
-      if (targetBtn) targetBtn.classList.add('active');
-
+      event.currentTarget.classList.add('active');
       const targetPanel = document.getElementById('tab-' + tabId);
-      if (targetPanel) targetPanel.classList.add('active');
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
     }
 
-    // Telemetry Updater
-    async function updateDashboard() {
+    // Copy helper
+    function copyAddress(elementId, btn) {
+      const text = document.getElementById(elementId).innerText;
+      if (!text || text.includes('...')) return;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = 'Copied!';
+        btn.style.borderColor = '#0052FF';
+        btn.style.color = '#0052FF';
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+
+    // Telemetry Poller
+    async function updateTelemetry() {
       try {
-        const res = await fetch('/api/status');
+        const res = await fetch('/api/status', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
         if (data.epoch !== undefined) {
-          document.getElementById('epoch-counter').innerText = '#' + data.epoch;
-          document.getElementById('status-badge').innerText = `DEVNET CONSENSUS • EPOCH #${data.epoch}`;
+          document.getElementById('epoch-counter').innerText = `#${data.epoch}`;
+        } else if (data.current_epoch !== undefined) {
+          document.getElementById('epoch-counter').innerText = `#${data.current_epoch}`;
         }
+
         if (data.status) {
           document.getElementById('node-status').innerText = data.status.toUpperCase();
         }
-        if (data.validator) {
-          document.getElementById('validator-address').innerText = data.validator;
+
+        if (data.wallet_address || data.address || data.account) {
+          document.getElementById('validator-address').innerText = data.wallet_address || data.address || data.account;
         }
+
         document.getElementById('telemetry-json').innerText = JSON.stringify(data, null, 2);
       } catch (err) {
-        document.getElementById('node-status').innerText = 'CONNECTING';
+        document.getElementById('node-status').innerText = 'OFFLINE';
+        document.getElementById('telemetry-json').innerText = JSON.stringify({
+          error: 'Could not connect to node daemon',
+          message: err.message,
+          timestamp: new Date().toISOString()
+        }, null, 2);
       }
     }
 
-    function copyAddress(elementId, btn) {
-      const text = document.getElementById(elementId).innerText;
-      navigator.clipboard.writeText(text);
-      const originalText = btn.innerText;
-      btn.innerText = 'Copied!';
-      setTimeout(() => btn.innerText = originalText, 2000);
-    }
+    setInterval(updateTelemetry, 2500);
+    updateTelemetry();
 
-    // BIP39 / Offline Key Generator
-    const WORDLIST = ["abandon","ability","able","about","above","absent","absorb","abstract","absurd","abuse","access","accident","account","accuse","achieve","acid","acoustic","acquire","across","act","action","actor","actress","actual","adapt","add","addict","address","adjust","admit","adult","advance","advice","aerobic","affair","afford","afraid","again","age","agent","agree","ahead","aim","air","airport","aisle","alarm","album","alcohol","alert","alien","all","alley","allow","almost","alone","alpha","already","also","alter","always","amateur","amazing","among","amount","amused","analyst","anchor","ancient","anger","angle","angry","animal","ankle","announce","annual","another","answer","antenna","antique","anxiety","any","apart","apology","appear","apple","approve","april","arch","arctic","area","arena","argue","arm","armed","armor","army","around","arrange","arrest","arrive","arrow","art","artefact","artist","artwork","ask","aspect","assault","asset","assist","assume","asthma","athlete","atom","attack","attend","attitude","attract","auction","audit","august","aunt","author","auto","autumn","average","avocado","avoid","awake","aware","away","awesome","awful","awkward","axis","baby","bachelor","bacon","badge","bag","balance","balcony","ball","bamboo","banana","banner","bar","barely","bargain","barrel","base","basic","basket","battle","beach","bean","beauty","because","become","beef","before","begin","behave","behind","believe","below","belt","bench","benefit","best","betray","better","between","beyond","bicycle","bid","bike","bind","biology","bird","birth","bitter","black","blade","blame","blanket","blast","bleak","bless","blind","blood","blossom","blouse","blue","blur","blush","board","boat","body","boil","bomb","bone","bonus","book","boost","border","boring","borrow","boss","bottom","bounce","box","boy","bracket","brain","brand","brass","brave","bread","breeze","brick","bridge","brief","bright","bring","brisk","broccoli","broken","bronze","broom","brother","brown","brush","bubble","buddy","budget","buffalo","build","bulb","bulk","bullet","bundle","bunker","burden","burger","burst","bus","business","busy","butter","buyer","buzz","cabbage","cabin","cable","cactus","cage","cake","call","calm","camera","camp","can","canal","cancel","candy","cannon","canoe","canvas","canyon","capable","capital","captain","car","carbon","card","cargo","carpet","carry","cart","case","cash","casino","castle","casual","cat","catalog","catch","category","cattle","caught","cause","caution","cave","ceiling","celery","cement","census","century","cereal","certain","chair","chalk","champion","change","chaos","chapter","charge","chase","chat","cheap","check","cheese","chef","cherry","chest","chicken","chief","child","chimney","choice","choose","chronic","chuckle","chunk","churn","cigar","cinnamon","circle","citizen","city","civil","claim","clap","clarify","claw","clay","clean","clerk","clever","click","client","cliff","climb","clinic","clip","clock","clog","close","cloth","cloud","clown","club","clump","cluster","clutch","coach","coast","coconut","code","coffee","coil","coin","collect","color","column","combine","come","comfort","comic","common","company","concert","conduct","confirm","congress","connect","consider","control","convince","cook","cool","copper","copy","coral","core","corn","correct","cost","cotton","couch","country","couple","course","cousin","cover","coyote","crack","cradle","craft","cram","crane","crash","crater","crawl","crazy","cream","credit","creek","crew","cricket","crime","crisp","critic","crop","cross","crouch","crowd","crucial","cruel","cruise","crumble","crunch","crush","cry","crystal","cube","culture","cup","cupboard","curious","current","curtain","curve","cushion","custom","cute","cycle","dad","damage","damp","dance","danger","daring","dash","daughter","dawn","day","deal","debate","debris","decade","december","decide","decline","decorate","decrease","deer","defense","define","defy","degree","delay","deliver","demand","demise","denial","dentist","deny","depart","depend","deposit","depth","deputy","derive","describe","desert","design","desk","despair","destroy","detail","detect","develop","device","devote","diagram","dial","diamond","diary","dice","diesel","diet","differ","digital","dignity","dilemma","dinner","dinosaur","direct","dirt","disagree","discover","disease","dish","dismiss","disorder","display","distance","divert","divide","divorce","dizzy","doctor","document","dog","doll","dolphin","domain","donate","donkey","donor","door","dose","double","dove","draft","dragon","drama","drastic","draw","dream","dress","drift","drill","drink","drip","drive","drop","drum","dry","duck","dumb","dune","during","dust","dutch","duty","dwarf","dynamic","eager","eagle","early","earn","earth","easily","east","easy","echo","ecology","economy","edge","edit","educate","effort","egg","eight","either","elbow","elder","electric","elegant","element","elephant","elevator","elite","else","embark","embody","embrace","emerge","emotion","employ","empower","empty","enable","enact","end","endless","endorse","enemy","energy","enforce","engage","engine","enhance","enjoy","enlist","enough","enrich","enroll","ensure","enter","entire","entry","envelope","episode","equal","equip","era","erase","erode","erosion","error","erupt","escape","essay","essence","estate","eternal","ethics","evidence","evil","evoke","evolve","exact","example","excess","exchange","excite","exclude","excuse","execute","exercise","exhaust","exhibit","exile","exist","exit","exotic","expand","expect","expire","explain","expose","express","extend","extra","eye","eyebrow","fabric","face","faculty","fade","faint","faith","fall","false","fame","family","famous","fan","fancy","fantasy","farm","fashion","fat","fatal","father","fatigue","fault","favorite","feature","february","federal","fee","feed","feel","female","fence","festival","fetch","fever","few","fiber","fiction","field","figure","file","film","filter","final","find","fine","finger","finish","fire","firm","first","fiscal","fish","fit","fitness","fix","flag","flame","flash","flat","flavor","flee","flight","flip","float","flock","floor","flower","fluid","flush","fly","foam","focus","fog","foil","fold","follow","food","foot","force","forest","forget","fork","fortune","forum","forward","fossil","foster","found","fox","fragile","frame","frequent","fresh","friend","fringe","frog","front","frost","frown","frozen","fruit","fuel","fun","funny","furnace","fury","future","gadget","gain","galaxy","gallery","game","gap","garage","garbage","garden","garlic","gas","gasp","gate","gather","gauge","gaze","general","genius","genre","gentle","genuine","gesture","ghost","giant","gift","giggle","ginger","giraffe","girl","give","glad","glance","glare","glass","glide","glimpse","globe","gloom","glory","glove","glow","glue","goat","goddess","gold","good","goose","gorilla","gospel","gossip","govern","gown","grab","grace","grain","grant","grape","grass","gravity","great","green","grid","grief","grit","grocery","group","grow","grunt","guard","guess","guide","guilt","guitar","gun","gym","habit","hair","half","hammer","hamster","hand","happy","harbor","hard","harsh","harvest","hat","have","hawk","hazard","head","health","heart","heavy","hedgehog","height","hello","helmet","help","hen","hero","hidden","high","hill","hint","hip","hire","history","hobby","hockey","hold","hole","holiday","hollow","home","honey","hood","hope","horn","horror","horse","hospital","host","hotel","hour","hover","hub","huge","human","humble","humor","hundred","hungry","hunt","hurdle","hurry","hurt","husband","hybrid","ice","icon","idea","identify","idle","ignore","ill","illegal","illness","image","imitate","immense","immune","impact","impose","improve","impulse","inch","include","income","increase","index","indicate","indoor","industry","infant","inflict","inform","inhale","inherit","initial","inject","injury","inmate","inner","innocent","input","inquiry","insane","insect","inside","inspire","install","intact","interest","into","invest","invite","involve","iron","island","isolate","issue","item","ivory","jacket","jaguar","jar","jazz","jealous","jeans","jelly","jewel","job","join","joke","journey","joy","judge","juice","jump","jungle","junior","junk","just","kangaroo","keen","keep","ketchup","key","kick","kid","kidney","kind","kingdom","kiss","kit","kitchen","kite","kitten","kiwi","knee","knife","knock","know","lab","label","labor","ladder","lady","lake","lamp","language","laptop","large","later","latin","laugh","laundry","lava","law","lawn","lawsuit","layer","lazy","leader","leaf","learn","leave","lecture","left","leg","legal","legend","leisure","lemon","lend","length","lens","leopard","lesson","letter","level","liar","liberty","library","license","life","lift","light","like","limb","limit","link","lion","liquid","list","little","live","lizard","load","loan","lobster","local","lock","logic","lonely","long","loop","lottery","loud","lounge","love","loyal","lucky","luggage","lumber","lunar","lunch","luxury","lyrics","machine","mad","magic","magnet","maid","mail","main","major","make","mammoth","man","manage","mandate","mango","mansion","manual","maple","marble","march","margin","marine","market","marriage","mask","mass","master","match","material","math","matrix","matter","maximum","maze","meadow","mean","measure","meat","mechanic","medal","media","melody","melt","member","memory","mention","menu","mercy","merge","merit","merry","mesh","message","metal","method","middle","midnight","milk","million","mimic","mind","minimum","minor","minute","miracle","mirror","misery","miss","mistake","mix","mixed","mixture","mobile","model","modify","mom","moment","monitor","monkey","month","moon","moral","more","morning","mosquito","mother","motion","motor","mountain","mouse","move","movie","much","muffin","mule","multiply","muscle","museum","mushroom","music","must","mutual","myself","mystery","myth","naive","name","napkin","narrow","nasty","nation","nature","near","neck","need","negative","neglect","neither","nephew","nerve","nest","net","network","neutral","never","news","next","nice","night","noble","noise","nominee","noodle","normal","north","nose","notable","note","nothing","notice","novel","now","nuclear","number","nurse","nut","oak","obey","object","oblige","obscure","observe","obtain","obvious","occur","ocean","october","odor","off","offer","office","often","oil","okay","old","olive","olympic","omit","once","one","onion","online","only","open","opera","opinion","oppose","option","orange","orbit","orchard","order","ordinary","organ","orient","original","orphan","ostrich","other","outdoor","outer","output","outside","oval","oven","over","own","owner","oxygen","oyster","ozone","pact","paddle","page","pair","palace","palm","panda","panel","panic","panther","paper","parade","parent","park","parrot","party","pass","patch","path","patient","patrol","pattern","pause","pave","payment","peace","peanut","pear","peasant","pelican","pen","penalty","pencil","people","pepper","perfect","permit","person","pet","phone","photo","phrase","physical","piano","picnic","picture","piece","pig","pigeon","pill","pilot","pin","pine","pipe","pistol","pitch","pizza","place","planet","plastic","plate","play","please","pledge","pluck","plug","plunge","poem","poet","point","polar","pole","police","pond","pony","pool","popular","portion","position","possible","post","potato","pottery","poverty","powder","power","practice","praise","predict","prefer","prepare","present","pretty","prevent","price","pride","primary","print","priority","prison","private","prize","problem","process","produce","profit","program","project","promote","proof","property","prosper","protect","proud","provide","public","pudding","pull","pulp","pulse","pumpkin","punch","pupil","puppy","purchase","purity","purpose","purse","push","put","puzzle","pyramid","quality","quantum","quarter","question","quick","quit","quiz","quote","rabbit","raccoon","race","rack","radar","radio","rail","rain","raise","rally","ramp","ranch","random","range","rapid","rare","rate","rather","raven","raw","razor","ready","real","reason","rebel","rebuild","recall","receive","recipe","record","recycle","reduce","reflect","reform","refuse","region","regret","regular","reject","relax","release","relief","rely","remain","remember","remind","remove","render","renew","rent","reopen","repair","repeat","replace","report","require","rescue","resemble","resist","resource","response","result","retire","retreat","return","reunion","reveal","review","reward","rhythm","rib","ribbon","rice","rich","ride","ridge","rifle","right","rigid","ring","riot","ripple","risk","ritual","rival","river","road","roast","robot","robust","rocket","romance","roof","rookie","room","rose","rotate","rough","round","route","royal","rubber","rude","rug","rule","run","runway","rural","sad","saddle","sadness","safe","sail","salad","salmon","salon","salt","salute","same","sample","sand","satisfy","satoshi","sauce","sausage","save","say","scale","scan","scare","scatter","scene","scheme","school","science","scissors","scooter","score","soup","source","south","space","spare","spatial","spawn","speak","special","speed","spell","spend","sphere","spice","spider","spike","spin","spirit","split","spoil","sponsor","spoon","sport","spot","spray","spread","spring","spy","square","squeeze","squirrel","stable","stadium","staff","stage","stair","stamp","stand","start","state","stay","steak","steel","stem","step","stereo","stick","still","sting","stock","stomach","stone","stool","story","stove","strategy","street","strike","strong","struggle","student","stuff","stumble","style","subject","submit","subway","success","such","sudden","suffer","sugar","suggest","suit","summer","sun","sunny","sunset","super","supply","supreme","sure","surface","surge","surprise","surround","survey","suspect","sustain","swallow","swamp","swap","swarm","swear","sweet","swift","swim","swing","switch","sword","symbol","symptom","syrup","system","table","tackle","tag","tail","talent","talk","tank","tape","target","task","taste","tattoo","taxi","teach","team","tell","ten","tenant","tennis","tent","term","test","text","thank","that","theme","then","theory","there","they","thing","this","thought","three","thrive","throw","thumb","thunder","ticket","tide","tiger","tilt","timber","time","tiny","tip","tired","tissue","title","toast","tobacco","today","toddler","toe","together","toilet","token","tomato","tomorrow","tone","tongue","tonight","tool","tooth","top","topic","topple","torch","tornado","tortoise","toss","total","tourist","toward","tower","town","toy","track","trade","traffic","train","transfer","trap","trash","travel","tray","treat","tree","trend","trial","tribe","trick","trigger","trim","trip","trophy","trouble","truck","true","truly","trumpet","trust","truth","try","tube","tuition","tumble","tuna","tunnel","turkey","turn","turtle","twelve","twenty","twice","twin","twist","two","type","typical","ugly","umbrella","unable","unaware","uncle","uncover","under","undo","unfair","unfold","unhappy","uniform","unique","unit","universe","unknown","unlock","until","unusual","unveil","update","upgrade","uphold","upon","upper","upset","urban","urge","usage","use","used","useful","useless","usual","utility","vacant","vacuum","vague","valid","valley","valve","van","vanish","vapor","various","vast","vault","vehicle","velvet","vendor","venture","venue","verb","verify","version","very","vessel","veteran","viable","vibrant","vicious","victory","video","view","village","vintage","violin","virtual","virus","visa","visit","visual","vital","vivid","vocal","voice","void","volcano","volume","vote","voyage","wage","wagon","wait","walk","wall","walnut","want","warfare","warm","warrior","wash","wasp","waste","water","wave","way","wealth","weapon","wear","weasel","weather","web","wedding","weekend","weird","welcome","west","wet","whale","what","wheat","wheel","when","where","whip","whisper","wide","width","wife","wild","will","win","window","wine","wing","wink","winner","winter","wire","wisdom","wise","wish","witness","wolf","woman","wonder","wood","wool","word","work","world","worry","worth","wrap","wreck","wrestle","wrist","write","wrong","yard","year","yellow","you","young","youth","zebra","zero","zone","zoo"];
+    // BIP39 Wordlist (English subset for client-side demo generation)
+    const WORDLIST = [
+      "abandon","ability","able","about","above","absent","absorb","abstract","absurd","abuse",
+      "access","accident","account","accuse","achieve","acid","acoustic","acquire","across","act",
+      "action","actor","actress","actual","adapt","add","addict","address","adjust","admit",
+      "adult","advance","advice","aerobic","affair","afford","afraid","again","age","agent",
+      "agree","ahead","aim","air","airport","aisle","alarm","album","alcohol","alert",
+      "alien","all","alley","allow","almost","alone","alpha","already","also","alter",
+      "always","amateur","amazing","among","amount","amused","analyst","anchor","ancient","anger",
+      "angle","angry","animal","ankle","announce","annual","another","answer","antenna","antique",
+      "anxiety","any","apart","apology","appear","apple","approve","april","arch","arctic",
+      "area","arena","argue","arm","armed","armor","army","around","arrange","arrest",
+      "arrive","arrow","art","artefact","artist","artwork","ask","aspect","assault","asset",
+      "assist","assume","asthma","athlete","atom","attack","attend","attitude","attract","auction",
+      "audit","august","aunt","author","auto","autumn","average","avocado","avoid","awake",
+      "aware","away","awesome","awful","awkward","axis","baby","bachelor","bacon","badge",
+      "bag","balance","balcony","ball","bamboo","banana","banner","bar","barely","bargain",
+      "barrel","base","basic","basket","battle","beach","bean","beauty","because","become",
+      "beef","before","begin","behave","behind","believe","below","belt","bench","benefit",
+      "best","betray","better","between","beyond","bicycle","bid","bike","bind","biology",
+      "bird","birth","bitter","black","blade","blame","blanket","blast","bleak","bless",
+      "blind","blood","blossom","blouse","blue","blur","blush","board","boat","body",
+      "boil","bomb","bone","bonus","book","boost","border","boring","borrow","boss",
+      "bottom","bounce","box","boy","bracket","brain","brand","brass","brave","bread",
+      "breeze","brick","bridge","brief","bright","bring","brisk","broccoli","broken","bronze",
+      "broom","brother","brown","brush","bubble","buddy","budget","buffalo","build","bulb",
+      "bulk","bullet","bundle","bunker","burden","burger","burst","bus","business","busy",
+      "butter","buyer","buzz","cabbage","cabin","cable","cactus","cage","cake","call",
+      "calm","camera","camp","can","canal","cancel","candy","cannon","canoe","canvas",
+      "canyon","capable","capital","captain","car","carbon","card","cargo","carpet","carry",
+      "cart","case","cash","casino","castle","casual","cat","catalog","catch","category",
+      "cattle","caught","cause","caution","cave","ceiling","celery","cement","census","century",
+      "cereal","certain","chair","chalk","champion","change","chaos","chapter","charge","chase",
+      "chat","cheap","check","cheese","chef","cherry","chest","chicken","chief","child",
+      "chimney","choice","choose","chronic","chuckle","chunk","churn","cigar","cinnamon","circle"
+    ];
 
-    function generateNewKeys() {
+    function generateKeypair() {
       const words = [];
-      const entropy = new Uint8Array(32);
-      crypto.getRandomValues(entropy);
-
+      const array = new Uint32Array(24);
+      window.crypto.getRandomValues(array);
       for (let i = 0; i < 24; i++) {
-        const randIndex = (entropy[i % 32] * 256 + entropy[(i + 1) % 32] + i * 37) % WORDLIST.length;
-        words.push(WORDLIST[randIndex]);
+        words.push(WORDLIST[array[i] % WORDLIST.length]);
       }
 
-      const seedGrid = document.getElementById('seed-grid');
-      seedGrid.innerHTML = '';
+      const grid = document.getElementById('seed-grid');
+      grid.innerHTML = '';
       words.forEach((w, idx) => {
-        const item = document.createElement('div');
-        item.className = 'seed-word';
-        item.innerHTML = `<span>${idx + 1}.</span>${w}`;
-        seedGrid.appendChild(item);
+        const div = document.createElement('div');
+        div.className = 'seed-word';
+        div.innerHTML = `<span>${idx + 1}.</span>${w}`;
+        grid.appendChild(div);
       });
 
-      // Generate mock Bech32 devnet address from entropy
-      let hexKey = Array.from(entropy).map(b => b.toString(16).padStart(2, '0')).join('');
-      let mockAddr = 'oct' + Array.from(entropy.slice(0, 20)).map(b => 'abcdefghijklmnopqrstuvwxyz0123456789'[b % 36]).join('');
+      // Derive mock Bech32 Octra Address format: oct...
+      const rawRand = new Uint8Array(20);
+      window.crypto.getRandomValues(rawRand);
+      const chars = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+      let addr = "oct1";
+      for (let b of rawRand) {
+        addr += chars[b % chars.length];
+      }
 
-      document.getElementById('gen-address').innerText = mockAddr;
-      document.getElementById('gen-privkey').innerText = hexKey;
-      document.getElementById('key-output').style.display = 'block';
+      document.getElementById('derived-address').innerText = addr;
+      document.getElementById('keygen-output').style.display = 'block';
     }
-
-    setInterval(updateDashboard, 2000);
-    updateDashboard();
   </script>
 </body>
 </html>
