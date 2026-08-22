@@ -13,6 +13,20 @@ PUBLIC_HOST="${PUBLIC_HOST:-127.0.0.1}"
 
 mkdir -p "$DATA_DIR" "$SYNC_DIR" /var/lib/octra/logs
 
+# Ensure nodes.config exists in cwd (/opt/octra) and data directory
+if [ ! -f /opt/octra/nodes.config ]; then
+  echo "[]" > /opt/octra/nodes.config
+fi
+if [ ! -f "$DATA_DIR/nodes.config" ]; then
+  cp /opt/octra/nodes.config "$DATA_DIR/nodes.config" 2>/dev/null || true
+fi
+
+# Clean up any partial/interrupted initial store from an earlier crashed run
+if [ -d "$DATA_DIR/irmin_store" ] && [ ! -f "$DATA_DIR/irmin_store/HEAD.json" ]; then
+  echo "⚠️ Detected incomplete store from interrupted run. Reinitializing fresh store..."
+  rm -rf "$DATA_DIR/irmin_store"
+fi
+
 # Start Web Status Dashboard in background
 echo "📊 Launching Web Dashboard on port 8080..."
 python3 /opt/octra/dashboard/server.py &

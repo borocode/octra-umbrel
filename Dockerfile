@@ -85,6 +85,7 @@ WORKDIR /opt/octra
 COPY --from=builder /build/octra/_build/default/bin/*.exe /opt/octra/bin/
 COPY --from=builder /build/octra/config /opt/octra/config/
 COPY --from=builder /build/octra/controls /opt/octra/controls/
+COPY --from=builder /build/octra/nodes.config /opt/octra/nodes.config
 
 # Copy dashboard and entrypoint
 COPY entrypoint.sh /opt/octra/entrypoint.sh

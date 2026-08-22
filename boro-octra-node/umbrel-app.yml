@@ -3,7 +3,7 @@ id: boro-octra-node
 name: Octra Lite Node
 tagline: Run a private, sovereign FHE node on the Octra Network
 category: Crypto
-version: "1.0.2"
+version: "1.0.3"
 port: 8098
 icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
@@ -23,7 +23,7 @@ repo: https://github.com/octra-labs/lite_node
 support: https://t.me/octranetwork
 gallery: []
 releaseNotes: >-
-  Version 1.0.2: Fix Docker PID 1 process hierarchy for PVAC proof verification worker isolation.
+  Version 1.0.3: Bundled nodes.config bootstrap peer definitions and auto-healing for interrupted initial store genesis.
 dependencies: []
 path: ""
 defaultUsername: ""
