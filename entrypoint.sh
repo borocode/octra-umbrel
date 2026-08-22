@@ -19,11 +19,11 @@ python3 /opt/octra/dashboard/server.py &
 DASHBOARD_PID=$!
 
 # Handle graceful shutdown
-trap 'echo "🛑 Stopping Octra Node..."; kill $DASHBOARD_PID 2>/dev/null; exit 0' SIGTERM SIGINT
+trap 'echo "🛑 Stopping Octra Node..."; kill $DASHBOARD_PID $NODE_PID 2>/dev/null; exit 0' SIGTERM SIGINT
 
 echo "🚀 Executing Octra Node binary in role: $NODE_ROLE..."
 
-exec /opt/octra/bin/octra_node.exe \
+/opt/octra/bin/octra_node.exe \
   --role "$NODE_ROLE" \
   --name "$NODE_NAME" \
   --advertise "$PUBLIC_HOST:19000" \
@@ -32,4 +32,7 @@ exec /opt/octra/bin/octra_node.exe \
   --p2p-port 9000 \
   --data-dir "$DATA_DIR" \
   --sync-stage "$SYNC_DIR" \
-  --network /opt/octra/config/network.env
+  --network /opt/octra/config/network.env &
+
+NODE_PID=$!
+wait $NODE_PID
