@@ -8,7 +8,6 @@ import sys
 
 PORT = 8080
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
-WALLET_BACKEND = "http://127.0.0.1:8420"
 DAEMON_RPC = "http://127.0.0.1:8081"
 
 class OctraDashboardHandler(http.server.SimpleHTTPRequestHandler):
@@ -18,74 +17,9 @@ class OctraDashboardHandler(http.server.SimpleHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
-        self.send_header("Access-Control-Max-Age", "600")
+        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
-
-    def map_wallet_path(self, raw_path):
-        # Extract path without query parameters for routing logic
-        path_only = raw_path.split("?")[0]
-        query = ("?" + raw_path.split("?", 1)[1]) if "?" in raw_path else ""
-
-        if path_only in ["/wallet", "/wallet/"]:
-            return "/index.html" + query
-        if path_only.startswith("/wallet/"):
-            return "/" + path_only[8:] + query
-        if path_only in ["/cipher", "/cipher/"]:
-            return "/cipher.html" + query
-        if path_only in ["/circles", "/circles/"]:
-            return "/circles.html" + query
-        if path_only in ["/swap", "/swap/"]:
-            return "/swap.html" + query
-        if path_only in ["/bridge", "/bridge/"]:
-            return "/bridge.html" + query
-        return raw_path
-
-    def proxy_to_wallet(self, method):
-        target_path = self.map_wallet_path(self.path)
-        url = f"{WALLET_BACKEND}{target_path}"
-        
-        body = None
-        content_length = int(self.headers.get("Content-Length", 0))
-        if content_length > 0:
-            body = self.rfile.read(content_length)
-
-        headers = {k: v for k, v in self.headers.items() if k.lower() not in ["host", "content-length"]}
-        headers["Host"] = "127.0.0.1:8420"
-
-        blocked_headers = ["transfer-encoding", "content-length", "x-frame-options", "content-security-policy"]
-
-        try:
-            req = urllib.request.Request(url, data=body, headers=headers, method=method)
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                self.send_response(resp.status)
-                for k, v in resp.getheaders():
-                    if k.lower() not in blocked_headers:
-                        self.send_header(k, v)
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.send_header("X-Frame-Options", "ALLOWALL")
-                content = resp.read()
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-        except urllib.error.HTTPError as e:
-            self.send_response(e.code)
-            for k, v in e.headers.items():
-                if k.lower() not in blocked_headers:
-                    self.send_header(k, v)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("X-Frame-Options", "ALLOWALL")
-            err_content = e.read()
-            self.send_header("Content-Length", str(len(err_content)))
-            self.end_headers()
-            self.wfile.write(err_content)
-        except Exception as e:
-            self.send_response(502)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(json.dumps({"ok": False, "error": f"Wallet service offline: {e}"}).encode("utf-8"))
 
     def do_GET(self):
         if self.path == "/api/status":
@@ -103,7 +37,6 @@ class OctraDashboardHandler(http.server.SimpleHTTPRequestHandler):
                 "p2p_port": 9000,
                 "consensus_port": 19000,
                 "api_port": 8081,
-                "wallet_port": 8420,
                 "data_dir": os.environ.get("OCTRA_DATA_DIR", "/var/lib/octra/devnet")
             }
             
@@ -120,29 +53,7 @@ class OctraDashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(node_status).encode("utf-8"))
             return
 
-        # Check if route should be forwarded to wallet backend
-        wallet_prefixes = [
-            "/api/", "/wallet", "/cipher", "/circles", "/swap", "/bridge",
-            "/style.css", "/cipher.css", "/cipher.js", "/wallet.js",
-            "/circles.js", "/swap.js", "/bridge.js", "/templates/",
-            "/icons/", "/circle_asset_chunks.js", "/circle_bridge_policy.js",
-            "/circle_public_prelude.js"
-        ]
-        
-        clean_path = self.path.split("?")[0]
-        if any(clean_path == r or clean_path.startswith(r) for r in wallet_prefixes):
-            self.proxy_to_wallet("GET")
-        else:
-            super().do_GET()
-
-    def do_POST(self):
-        self.proxy_to_wallet("POST")
-
-    def do_PUT(self):
-        self.proxy_to_wallet("PUT")
-
-    def do_DELETE(self):
-        self.proxy_to_wallet("DELETE")
+        super().do_GET()
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding='utf-8')

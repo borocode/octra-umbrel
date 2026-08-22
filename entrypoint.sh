@@ -11,12 +11,7 @@ NODE_ROLE="${NODE_ROLE:-observer}"
 NODE_NAME="${NODE_NAME:-umbrel-octra-node}"
 PUBLIC_HOST="${PUBLIC_HOST:-127.0.0.1}"
 
-mkdir -p "$DATA_DIR" "$SYNC_DIR" /var/lib/octra/wallet /var/lib/octra/logs
-
-# Link wallet data directory to persistent volume
-if [ ! -d /opt/octra/data ]; then
-  ln -sfn /var/lib/octra/wallet /opt/octra/data
-fi
+mkdir -p "$DATA_DIR" "$SYNC_DIR" /var/lib/octra/logs
 
 # Ensure nodes.config exists in cwd (/opt/octra) and data directory
 if [ ! -f /opt/octra/nodes.config ]; then
@@ -34,35 +29,25 @@ if [ -d "$DATA_DIR/epochlog" ] || [ -d "$DATA_DIR/irmin_store" ] || [ -f "$DATA_
   fi
 fi
 
-# Set node daemon and wallet environment variables
+# Set node daemon environment variables
 export OCTRA_API_PORT=8081
 export OCTRA_P2P_PORT=9000
 export OCTRA_DATA_DIR="$DATA_DIR"
 export OCTRA_SYNC_STAGE="$SYNC_DIR"
 export OCTRA_CHAIN_ID="octra-devnet"
 export OCTRA_RPC_URL="http://127.0.0.1:8081"
-export OCTRA_ALLOW_LAN="1"
 
-# Start Web Status Dashboard & API Gateway on port 8080 in background
-echo "📊 Launching Web Dashboard & Gateway on port 8080..."
+# Start Web Status Dashboard on port 8080 in background
+echo "📊 Launching Web Dashboard on port 8080..."
 python3 /opt/octra/dashboard/server.py &
 DASHBOARD_PID=$!
 
-# Start Octra Web Wallet & FHE Engine on port 8420 in background
-echo "👛 Launching Octra Web Wallet & FHE Engine on port 8420..."
-cd /opt/octra
-/opt/octra/bin/octra_wallet 8420 &
-WALLET_PID=$!
-
 # Graceful shutdown handler
 shutdown_node() {
-  echo "🛑 Received shutdown signal. Gracefully stopping Octra Node & Services..."
+  echo "🛑 Received shutdown signal. Gracefully stopping Octra Node..."
   if [ -n "$NODE_PID" ]; then
     kill -TERM "$NODE_PID" 2>/dev/null || true
     wait "$NODE_PID" 2>/dev/null || true
-  fi
-  if [ -n "$WALLET_PID" ]; then
-    kill -TERM "$WALLET_PID" 2>/dev/null || true
   fi
   kill "$DASHBOARD_PID" 2>/dev/null || true
   exit 0

@@ -1,25 +1,21 @@
 manifestVersion: 1
 id: boro-octra-node
-name: Octra Suite
-tagline: Sovereign FHE Consensus Node, Web Wallet, Smart Contract IDE & Key Generator
+name: Octra Lite Node
+tagline: Sovereign FHE Consensus Validator & Telemetry Dashboard
 category: Crypto
-version: "1.1.0"
+version: "1.1.1"
 port: 8098
 icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
-  Octra is a breakthrough Layer 1 blockchain powered by Hypergraph Fully Homomorphic Encryption (HFHE).
+  Octra is a breakthrough Layer 1 blockchain powered by Hypergraph Fully Homomorphic Encryption (HFHE) enabling private smart contracts and encrypted compute at scale.
 
-  The Octra Suite for Umbrel provides an all-in-one sovereign hub combining consensus validation, private wallet management, and smart contract development directly on your personal server:
+  The Octra Lite Node app for Umbrel allows you to run a sovereign observer and validator node directly on your private server:
 
-  🔵 Consensus Node: Runs a sovereign observer & validator node connected to Devnet (octra-devnet-9871-cluster), benchmarking confidential FHE circuits and validating live epochs.
+  🔵 Consensus Validation: Connects directly to Octra Devnet (octra-devnet-9871-cluster), benchmarking confidential FHE circuits and validating live epochs.
 
-  👛 Web Wallet & FHE Engine: Encrypted keystore, balance tracking, confidential transactions, and stealth address payments powered by PVAC-HFHE.
+  📊 Real-time Telemetry: Live web dashboard displaying active epochs, engine status, peer metrics, and JSON RPC streaming.
 
-  ⚙️ Circles IDE: Interactive smart contract development environment with pre-built AML templates for AMMs, Tokens, Escrows, Vaults, and Multisig.
-
-  🔒 FHE Cipher & Swap: Inspect homomorphic ciphertext structures and test token swaps.
-
-  🔑 Key Generator: Client-side offline 24-word BIP39 mnemonic and Bech32 address generation.
+  🔒 Self-Healing Persistence: Automated state-sync and store healing ensure 24/7 autonomous uptime.
 developer: Octra Labs
 website: https://octra.org
 submitter: Boro Labs
@@ -28,7 +24,7 @@ repo: https://github.com/octra-labs/lite_node
 support: https://t.me/octranetwork
 gallery: []
 releaseNotes: >-
-  Version 1.1.0: Full Octra Suite release! Embedded octra-labs/webcli C++ FHE Web Wallet, Smart Contract Circles IDE, FHE Cipher visualizer, AMM Token Swap, and offline 24-word Key Generator with unified gateway routing.
+  Version 1.1.1: Streamlined and refocused on the core Octra Lite Node with an official Octra blue-on-white telemetry dashboard and automated store self-healing.
 dependencies: []
 path: ""
 defaultUsername: ""

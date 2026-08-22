@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>octra | sovereign node & wallet suite</title>
+  <title>octra | lite node</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,21 +12,17 @@
       --bg: #FFFFFF;
       --bg-subtle: #F8FAFC;
       --card-bg: #FFFFFF;
-      --card-hover: #F8FAFC;
       --border: #E2E8F0;
-      --border-dark: #CBD5E1;
       --blue: #0052FF;
-      --blue-hover: #0045e6;
+      --blue-hover: #0045E6;
       --blue-light: #EFF6FF;
       --blue-border: #BFDBFE;
-      --cyan: #0284C7;
       --text: #0F172A;
       --text-secondary: #334155;
       --text-muted: #64748B;
       --text-dim: #94A3B8;
       --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
     }
 
     * {
@@ -43,13 +39,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1.2rem;
+      padding: 2.5rem 1.5rem;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
       width: 100%;
-      max-width: 1060px;
+      max-width: 960px;
     }
 
     /* Header matching octra.org */
@@ -59,7 +55,7 @@
       align-items: center;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .brand {
@@ -113,74 +109,17 @@
       color: var(--blue);
     }
 
-    /* Navigation Tabs */
-    .tab-bar {
-      display: flex;
-      gap: 0.5rem;
-      background: #FFFFFF;
-      padding: 0.35rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 1.8rem;
-      overflow-x: auto;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-secondary);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.86rem;
-      font-weight: 500;
-      padding: 0.6rem 1.1rem;
-      border-radius: 7px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .tab-btn:hover {
-      color: var(--blue);
-      background: var(--blue-light);
-    }
-
-    .tab-btn.active {
-      background: var(--blue-light);
-      color: var(--blue);
-      border-color: var(--blue-border);
-      font-weight: 600;
-    }
-
-    /* Tab Panels */
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-      animation: fadeIn 0.25s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(3px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* Hero / Status Section */
     .hero {
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .hero h1 {
-      font-size: 1.65rem;
+      font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: -0.6px;
       line-height: 1.35;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.85rem;
       color: var(--text);
     }
 
@@ -220,15 +159,15 @@
     /* Metrics Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 1.1rem;
+      margin-bottom: 1.6rem;
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 1.25rem;
+      padding: 1.3rem;
       border-radius: 10px;
       box-shadow: var(--shadow-sm);
       transition: border-color 0.2s, box-shadow 0.2s;
@@ -263,10 +202,10 @@
     .address-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 1.25rem;
+      padding: 1.3rem;
       border-radius: 10px;
       box-shadow: var(--shadow-sm);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
     }
 
     .address-wrapper {
@@ -314,7 +253,7 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 1.25rem;
+      padding: 1.3rem;
       box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
     }
@@ -338,122 +277,10 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       color: #38BDF8;
-      max-height: 240px;
+      max-height: 260px;
       overflow-y: auto;
       white-space: pre-wrap;
       line-height: 1.5;
-    }
-
-    /* Embedded Tool Frames */
-    .tool-frame-container {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .tool-frame-header {
-      background: #FFFFFF;
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .tool-frame {
-      width: 100%;
-      height: 750px;
-      border: none;
-      background: #FFFFFF;
-      display: block;
-    }
-
-    /* Key Generator Styles */
-    .keygen-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.6rem;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 2rem;
-    }
-
-    .keygen-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-      color: var(--text);
-    }
-
-    .keygen-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 1.4rem;
-      line-height: 1.55;
-    }
-
-    .keygen-action-btn {
-      background: var(--blue);
-      color: #FFFFFF;
-      border: none;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .keygen-action-btn:hover {
-      background: var(--blue-hover);
-    }
-
-    .keygen-action-btn:active {
-      transform: scale(0.99);
-    }
-
-    .key-output-box {
-      margin-top: 1.6rem;
-      display: none;
-    }
-
-    .seed-phrase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-      gap: 0.6rem;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      padding: 1.1rem;
-      border-radius: 8px;
-      margin-top: 0.9rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .seed-word {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--blue);
-      background: #FFFFFF;
-      padding: 0.45rem 0.7rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .seed-word span {
-      color: var(--text-dim);
-      font-weight: 400;
-      margin-right: 0.4rem;
     }
 
     /* Footer matching octra.org */
@@ -493,7 +320,7 @@
         </svg>
         <div class="brand-title">
           octra
-          <span class="node-tag">/ node & wallet suite</span>
+          <span class="node-tag">/ lite node</span>
         </div>
       </div>
 
@@ -504,126 +331,51 @@
       </div>
     </header>
 
-    <!-- Navigation Tab Bar -->
-    <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('node')">🔵 Node Telemetry</button>
-      <button class="tab-btn" onclick="switchTab('wallet')">👛 Web Wallet</button>
-      <button class="tab-btn" onclick="switchTab('cipher')">🔒 FHE Cipher</button>
-      <button class="tab-btn" onclick="switchTab('circles')">⚙️ Circles IDE</button>
-      <button class="tab-btn" onclick="switchTab('swap')">🔄 Token Swap</button>
-      <button class="tab-btn" onclick="switchTab('keygen')">🔑 Key Generator</button>
-    </div>
-
-    <!-- TAB 1: Node Telemetry -->
-    <div id="tab-node" class="tab-panel active">
-      <div class="hero">
-        <h1>octra is universal encrypted compute for <span>blockchain, ai and apps</span></h1>
-        <div class="status-bar">
-          <div class="pulse-dot"></div>
-          <span id="status-badge">DEVNET CONSENSUS • OPERATIONAL</span>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="card-label">Consensus Epoch</div>
-          <div class="card-value highlight" id="epoch-counter">Syncing...</div>
-        </div>
-        <div class="card">
-          <div class="card-label">Engine Status</div>
-          <div class="card-value" id="node-status">RUNNING</div>
-        </div>
-        <div class="card">
-          <div class="card-label">FHE Circuit Engine</div>
-          <div class="card-value" style="font-size: 0.95rem; color: #0284C7;">PVAC-HFHE (2¹²⁷-1)</div>
-        </div>
-        <div class="card">
-          <div class="card-label">P2P / Consensus Port</div>
-          <div class="card-value" style="font-size: 0.95rem;">:9000 / :19000</div>
-        </div>
-      </div>
-
-      <div class="address-card">
-        <div class="card-label">Validator Public Address (Devnet)</div>
-        <div class="address-wrapper">
-          <span class="address-text" id="validator-address">Loading local wallet address...</span>
-          <button class="copy-btn" onclick="copyAddress('validator-address', this)">Copy</button>
-        </div>
-      </div>
-
-      <div class="telemetry-box">
-        <div class="telemetry-header">
-          <span>RUNTIME TELEMETRY STREAM</span>
-          <span>Daemon Port 8081</span>
-        </div>
-        <pre id="telemetry-json">Connecting to local Octra daemon...</pre>
+    <!-- Hero / Status Section -->
+    <div class="hero">
+      <h1>octra is universal encrypted compute for <span>blockchain, ai and apps</span></h1>
+      <div class="status-bar">
+        <div class="pulse-dot"></div>
+        <span id="status-badge">DEVNET CONSENSUS • OPERATIONAL</span>
       </div>
     </div>
 
-    <!-- TAB 2: Web Wallet -->
-    <div id="tab-wallet" class="tab-panel">
-      <div class="tool-frame-container">
-        <div class="tool-frame-header">
-          <span>OCTRA WEBCLI WALLET • ENCRYPTED PVAC-HFHE ENGINE</span>
-          <a href="/wallet/" target="_blank" class="nav-link">Open in New Window ↗</a>
-        </div>
-        <iframe src="/wallet/" class="tool-frame" id="iframe-wallet"></iframe>
+    <!-- Node Metrics Grid -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">Consensus Epoch</div>
+        <div class="card-value highlight" id="epoch-counter">Syncing...</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Engine Status</div>
+        <div class="card-value" id="node-status">RUNNING</div>
+      </div>
+      <div class="card">
+        <div class="card-label">FHE Circuit Engine</div>
+        <div class="card-value" style="font-size: 0.95rem; color: #0284C7;">PVAC-HFHE (2¹²⁷-1)</div>
+      </div>
+      <div class="card">
+        <div class="card-label">P2P / Consensus Port</div>
+        <div class="card-value" style="font-size: 0.95rem;">:9000 / :19000</div>
       </div>
     </div>
 
-    <!-- TAB 3: FHE Cipher -->
-    <div id="tab-cipher" class="tab-panel">
-      <div class="tool-frame-container">
-        <div class="tool-frame-header">
-          <span>OCTRA CIPHERTEXT STRUCTURE • HFHE STATE VISUALIZER</span>
-          <a href="/cipher.html" target="_blank" class="nav-link">Open in New Window ↗</a>
-        </div>
-        <iframe src="/cipher.html" class="tool-frame" id="iframe-cipher"></iframe>
+    <!-- Validator Public Address Card -->
+    <div class="address-card">
+      <div class="card-label">Validator Public Address (Devnet)</div>
+      <div class="address-wrapper">
+        <span class="address-text" id="validator-address">Loading local node address...</span>
+        <button class="copy-btn" onclick="copyAddress('validator-address', this)">Copy</button>
       </div>
     </div>
 
-    <!-- TAB 4: Circles IDE -->
-    <div id="tab-circles" class="tab-panel">
-      <div class="tool-frame-container">
-        <div class="tool-frame-header">
-          <span>OCTRA CIRCLES • SMART CONTRACT IDE & TEMPLATES</span>
-          <a href="/circles.html" target="_blank" class="nav-link">Open in New Window ↗</a>
-        </div>
-        <iframe src="/circles.html" class="tool-frame" id="iframe-circles"></iframe>
+    <!-- Runtime Telemetry Stream -->
+    <div class="telemetry-box">
+      <div class="telemetry-header">
+        <span>RUNTIME TELEMETRY STREAM</span>
+        <span>Daemon Port 8081</span>
       </div>
-    </div>
-
-    <!-- TAB 5: Token Swap -->
-    <div id="tab-swap" class="tab-panel">
-      <div class="tool-frame-container">
-        <div class="tool-frame-header">
-          <span>OCTRA TOKEN SWAP • DEVNET AMM DEMO</span>
-          <a href="/swap.html" target="_blank" class="nav-link">Open in New Window ↗</a>
-        </div>
-        <iframe src="/swap.html" class="tool-frame" id="iframe-swap"></iframe>
-      </div>
-    </div>
-
-    <!-- TAB 6: BIP39 Keygen -->
-    <div id="tab-keygen" class="tab-panel">
-      <div class="keygen-card">
-        <div class="keygen-title">Cryptographic Key & Mnemonic Generator</div>
-        <div class="keygen-desc">
-          Generate a secure 24-word BIP39 mnemonic seed phrase and derived Octra Bech32 public address offline in your browser.
-        </div>
-        <button class="keygen-action-btn" onclick="generateKeypair()">Generate New 24-Word Seed Phrase</button>
-
-        <div id="keygen-output" class="key-output-box">
-          <div class="card-label" style="margin-top: 1rem;">24-Word Recovery Phrase</div>
-          <div id="seed-grid" class="seed-phrase-grid"></div>
-
-          <div class="card-label">Derived Octra Address</div>
-          <div class="address-wrapper" style="margin-bottom: 1rem;">
-            <span class="address-text" id="derived-address">-</span>
-            <button class="copy-btn" onclick="copyAddress('derived-address', this)">Copy</button>
-          </div>
-        </div>
-      </div>
+      <pre id="telemetry-json">Connecting to local Octra daemon...</pre>
     </div>
 
     <!-- Footer -->
@@ -634,18 +386,6 @@
   </div>
 
   <script>
-    // Tab switching
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-
-      event.currentTarget.classList.add('active');
-      const targetPanel = document.getElementById('tab-' + tabId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
-    }
-
     // Copy helper
     function copyAddress(elementId, btn) {
       const text = document.getElementById(elementId).innerText;
@@ -681,8 +421,8 @@
           document.getElementById('node-status').innerText = data.status.toUpperCase();
         }
 
-        if (data.wallet_address || data.address || data.account) {
-          document.getElementById('validator-address').innerText = data.wallet_address || data.address || data.account;
+        if (data.wallet_address || data.address || data.account || data.validator) {
+          document.getElementById('validator-address').innerText = data.wallet_address || data.address || data.account || data.validator;
         }
 
         document.getElementById('telemetry-json').innerText = JSON.stringify(data, null, 2);
@@ -698,73 +438,6 @@
 
     setInterval(updateTelemetry, 2500);
     updateTelemetry();
-
-    // BIP39 Wordlist (English subset for client-side demo generation)
-    const WORDLIST = [
-      "abandon","ability","able","about","above","absent","absorb","abstract","absurd","abuse",
-      "access","accident","account","accuse","achieve","acid","acoustic","acquire","across","act",
-      "action","actor","actress","actual","adapt","add","addict","address","adjust","admit",
-      "adult","advance","advice","aerobic","affair","afford","afraid","again","age","agent",
-      "agree","ahead","aim","air","airport","aisle","alarm","album","alcohol","alert",
-      "alien","all","alley","allow","almost","alone","alpha","already","also","alter",
-      "always","amateur","amazing","among","amount","amused","analyst","anchor","ancient","anger",
-      "angle","angry","animal","ankle","announce","annual","another","answer","antenna","antique",
-      "anxiety","any","apart","apology","appear","apple","approve","april","arch","arctic",
-      "area","arena","argue","arm","armed","armor","army","around","arrange","arrest",
-      "arrive","arrow","art","artefact","artist","artwork","ask","aspect","assault","asset",
-      "assist","assume","asthma","athlete","atom","attack","attend","attitude","attract","auction",
-      "audit","august","aunt","author","auto","autumn","average","avocado","avoid","awake",
-      "aware","away","awesome","awful","awkward","axis","baby","bachelor","bacon","badge",
-      "bag","balance","balcony","ball","bamboo","banana","banner","bar","barely","bargain",
-      "barrel","base","basic","basket","battle","beach","bean","beauty","because","become",
-      "beef","before","begin","behave","behind","believe","below","belt","bench","benefit",
-      "best","betray","better","between","beyond","bicycle","bid","bike","bind","biology",
-      "bird","birth","bitter","black","blade","blame","blanket","blast","bleak","bless",
-      "blind","blood","blossom","blouse","blue","blur","blush","board","boat","body",
-      "boil","bomb","bone","bonus","book","boost","border","boring","borrow","boss",
-      "bottom","bounce","box","boy","bracket","brain","brand","brass","brave","bread",
-      "breeze","brick","bridge","brief","bright","bring","brisk","broccoli","broken","bronze",
-      "broom","brother","brown","brush","bubble","buddy","budget","buffalo","build","bulb",
-      "bulk","bullet","bundle","bunker","burden","burger","burst","bus","business","busy",
-      "butter","buyer","buzz","cabbage","cabin","cable","cactus","cage","cake","call",
-      "calm","camera","camp","can","canal","cancel","candy","cannon","canoe","canvas",
-      "canyon","capable","capital","captain","car","carbon","card","cargo","carpet","carry",
-      "cart","case","cash","casino","castle","casual","cat","catalog","catch","category",
-      "cattle","caught","cause","caution","cave","ceiling","celery","cement","census","century",
-      "cereal","certain","chair","chalk","champion","change","chaos","chapter","charge","chase",
-      "chat","cheap","check","cheese","chef","cherry","chest","chicken","chief","child",
-      "chimney","choice","choose","chronic","chuckle","chunk","churn","cigar","cinnamon","circle"
-    ];
-
-    function generateKeypair() {
-      const words = [];
-      const array = new Uint32Array(24);
-      window.crypto.getRandomValues(array);
-      for (let i = 0; i < 24; i++) {
-        words.push(WORDLIST[array[i] % WORDLIST.length]);
-      }
-
-      const grid = document.getElementById('seed-grid');
-      grid.innerHTML = '';
-      words.forEach((w, idx) => {
-        const div = document.createElement('div');
-        div.className = 'seed-word';
-        div.innerHTML = `<span>${idx + 1}.</span>${w}`;
-        grid.appendChild(div);
-      });
-
-      // Derive mock Bech32 Octra Address format: oct...
-      const rawRand = new Uint8Array(20);
-      window.crypto.getRandomValues(rawRand);
-      const chars = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
-      let addr = "oct1";
-      for (let b of rawRand) {
-        addr += chars[b % chars.length];
-      }
-
-      document.getElementById('derived-address').innerText = addr;
-      document.getElementById('keygen-output').style.display = 'block';
-    }
   </script>
 </body>
 </html>
