@@ -11,7 +11,7 @@ rep1 = """static bool is_loopback_host(std::string host, int port) {
     if (std::getenv("OCTRA_ALLOW_LAN")) return true;"""
 
 target2 = "static bool is_allowed_webcli_origin(const std::string& origin, int port) {"
-rep2 = """static bool is_allowed_webcli_origin(const std::string& origin, int port) {"
+rep2 = """static bool is_allowed_webcli_origin(const std::string& origin, int port) {
     if (std::getenv("OCTRA_ALLOW_LAN")) return true;"""
 
 if target1 in content:
