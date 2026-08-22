@@ -22,4 +22,12 @@ if target2 in content:
 with open(target_path, "w", encoding="utf-8") as f:
     f.write(content)
 
+if os.path.exists("Makefile"):
+    with open("Makefile", "r", encoding="utf-8") as f:
+        mf = f.read()
+    mf = mf.replace("ARCH:=-march=native", "ARCH:=")
+    with open("Makefile", "w", encoding="utf-8") as f:
+        f.write(mf)
+    print("Successfully patched Makefile for portable multi-arch build")
+
 print(f"Successfully patched {target_path}")

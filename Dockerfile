@@ -64,7 +64,7 @@ COPY patch_webcli.py /build/patch_webcli.py
 WORKDIR /build/webcli
 RUN git clone --branch main --single-branch https://github.com/octra-labs/webcli.git . \
     && python3 /build/patch_webcli.py main.cpp \
-    && OCTRA_SKIP_AUTOSETUP=1 make -j$(nproc)
+    && OCTRA_SKIP_AUTOSETUP=1 make ARCH="" -j$(nproc)
 
 # ==============================================================================
 # Runtime Stage
