@@ -4,7 +4,7 @@ name: Octra Lite Node
 tagline: Run a private, sovereign FHE node on the Octra Network
 category: Crypto
 version: "1.0.0"
-port: 8080
+port: 8098
 icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
   Octra is a next-generation Layer 1 powered by Fully Homomorphic Encryption (FHE).
