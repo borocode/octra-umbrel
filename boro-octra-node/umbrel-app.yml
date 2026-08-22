@@ -1,11 +1,11 @@
 manifestVersion: 1
-id: borocode-octra-node
+id: boro-octra-node
 name: Octra Lite Node
 tagline: Run a private, sovereign FHE node on the Octra Network
 category: Crypto
 version: "1.0.0"
 port: 8080
-icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/borocode-octra-node/icon.svg
+icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
   Octra is a next-generation Layer 1 powered by Fully Homomorphic Encryption (FHE).
   The Octra Lite Node allows you to run an observer or validator node directly
@@ -19,7 +19,7 @@ description: >-
 
 developer: Octra Labs
 website: https://octra.org
-submitter: borocode
+submitter: Boro Labs
 submission: https://github.com/borocode/octra-umbrel
 repo: https://github.com/octra-labs/lite_node
 support: https://t.me/octranetwork
