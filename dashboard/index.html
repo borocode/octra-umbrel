@@ -6,13 +6,13 @@
   <title>Octra Lite Node // Umbrel Dashboard</title>
   <style>
     :root {
-      --bg: #050505;
-      --card-bg: #0d0d0d;
-      --border: #1a331a;
-      --green: #00ff66;
-      --green-dim: #008833;
-      --text: #e0e0e0;
-      --text-muted: #666666;
+      --bg: #06080f;
+      --card-bg: #0c101b;
+      --border: #18223c;
+      --blue: #0055ff;
+      --blue-dim: #0033aa;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
     }
 
     * {
@@ -49,14 +49,14 @@
     .title {
       font-size: 1.4rem;
       font-weight: 700;
-      color: var(--green);
+      color: var(--blue);
       letter-spacing: 1px;
     }
 
     .status-badge {
-      background: rgba(0, 255, 102, 0.1);
-      border: 1px solid var(--green);
-      color: var(--green);
+      background: rgba(0, 85, 255, 0.12);
+      border: 1px solid var(--blue);
+      color: #38bdf8;
       padding: 0.3rem 0.8rem;
       border-radius: 4px;
       font-size: 0.85rem;
@@ -68,9 +68,9 @@
     .dot {
       width: 8px;
       height: 8px;
-      background: var(--green);
+      background: #38bdf8;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
+      box-shadow: 0 0 8px #38bdf8;
       animation: pulse 2s infinite;
     }
 
@@ -115,7 +115,7 @@
     }
 
     .logs-header {
-      color: var(--green);
+      color: #38bdf8;
       font-size: 0.9rem;
       font-weight: bold;
       margin-bottom: 0.8rem;
@@ -124,12 +124,12 @@
     }
 
     pre {
-      background: #000000;
-      border: 1px solid #111111;
+      background: #04060a;
+      border: 1px solid #141c2e;
       padding: 1rem;
       border-radius: 4px;
       font-size: 0.8rem;
-      color: #39ff14;
+      color: #38bdf8;
       max-height: 200px;
       overflow-y: auto;
       white-space: pre-wrap;
@@ -143,12 +143,12 @@
     }
 
     footer a {
-      color: var(--green-dim);
+      color: var(--blue);
       text-decoration: none;
     }
 
     footer a:hover {
-      color: var(--green);
+      color: #38bdf8;
     }
   </style>
 </head>
@@ -166,7 +166,7 @@
     <div class="grid">
       <div class="card">
         <div class="card-label">Consensus Epoch</div>
-        <div class="card-value" style="color: var(--green);" id="node-epoch">Syncing...</div>
+        <div class="card-value" style="color: #38bdf8;" id="node-epoch">Syncing...</div>
       </div>
       <div class="card">
         <div class="card-label">Node Status</div>
@@ -184,7 +184,7 @@
 
     <div class="card" style="margin-bottom: 1rem;">
       <div class="card-label">Validator Public Address</div>
-      <div class="card-value" style="font-size: 0.85rem; word-break: break-all; color: var(--green);" id="validator-addr">Loading...</div>
+      <div class="card-value" style="font-size: 0.85rem; word-break: break-all; color: #38bdf8;" id="validator-addr">Loading...</div>
     </div>
 
     <div class="logs-box">
