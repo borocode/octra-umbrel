@@ -40,12 +40,12 @@ If you want to test the container directly on your Umbrel node before adding the
 ssh umbrel@10.0.0.67
 
 # 2. Navigate to your app-data directory
-mkdir -p ~/umbrel/app-data/octra-node/data
-cd ~/umbrel/app-data/octra-node
+mkdir -p ~/umbrel/app-data/boro-octra-node/data
+cd ~/umbrel/app-data/boro-octra-node
 
 # 3. Clone this repository
 git clone https://github.com/borocode/octra-umbrel.git temp
-cp -r temp/octra-node/* .
+cp -r temp/boro-octra-node/* .
 rm -rf temp
 
 # 4. Start the app via Docker Compose
@@ -77,5 +77,5 @@ To submit to the official [`getumbrel/umbrel-apps`](https://github.com/getumbrel
 
 ## 📜 License
 
-Packaged with ⚡ by [borocode](https://github.com/borocode).  
+Packaged with ⚡ by [Boro Labs](https://github.com/borocode).  
 Octra Network core node is developed by [Octra Labs](https://github.com/octra-labs/lite_node).
