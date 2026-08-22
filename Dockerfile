@@ -88,7 +88,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create dedicated operator user and directories
 RUN useradd -m -u 1000 -s /bin/bash octra \
-    && mkdir -p /opt/octra/bin /opt/octra/bin/pvac_build /opt/octra/config /var/lib/octra/wallet /opt/octra/dashboard /opt/octra/static \
+    && mkdir -p /opt/octra/bin /opt/octra/bin/pvac/build /opt/octra/config /var/lib/octra/wallet /opt/octra/dashboard /opt/octra/static \
     && chown -R octra:octra /opt/octra /var/lib/octra
 
 WORKDIR /opt/octra
@@ -101,8 +101,8 @@ COPY --from=builder /build/octra/nodes.config /opt/octra/nodes.config
 
 # Copy webcli wallet binary, pvac library and static web assets
 COPY --from=builder /build/webcli/octra_wallet /opt/octra/bin/octra_wallet
-COPY --from=builder /build/webcli/pvac_build/libpvac.so /opt/octra/bin/pvac_build/libpvac.so
-COPY --from=builder /build/webcli/pvac_build/libpvac.so /usr/lib/libpvac.so
+COPY --from=builder /build/webcli/pvac/build/libpvac.so /opt/octra/bin/pvac/build/libpvac.so
+COPY --from=builder /build/webcli/pvac/build/libpvac.so /usr/lib/libpvac.so
 COPY --from=builder /build/webcli/static/ /opt/octra/static/
 
 # Copy dashboard and entrypoint
