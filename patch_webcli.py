@@ -25,7 +25,22 @@ with open(target_path, "w", encoding="utf-8") as f:
 if os.path.exists("Makefile"):
     with open("Makefile", "r", encoding="utf-8") as f:
         mf = f.read()
-    mf = mf.replace("ARCH:=-march=native", "ARCH:=")
+    old_arch_block = """ifeq ($(UNAME_M),arm64)
+ARCH:=-march=armv8-a+crypto
+else
+ARCH:=-march=native
+endif"""
+    new_arch_block = """ifeq ($(UNAME_M),aarch64)
+ARCH:=-march=armv8.2-a+crypto+sha3
+else ifeq ($(UNAME_M),arm64)
+ARCH:=-march=armv8.2-a+crypto+sha3
+else
+ARCH:=-maes -msse4.2
+endif"""
+    if old_arch_block in mf:
+        mf = mf.replace(old_arch_block, new_arch_block)
+    else:
+        mf = mf.replace("ARCH:=-march=native", "ARCH:=-maes -msse4.2")
     with open("Makefile", "w", encoding="utf-8") as f:
         f.write(mf)
     print("Successfully patched Makefile for portable multi-arch build")
