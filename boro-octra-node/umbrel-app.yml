@@ -1,20 +1,24 @@
 manifestVersion: 1
 id: boro-octra-node
 name: Octra Lite Node
-tagline: Run a private, sovereign FHE node on the Octra Network
+tagline: Contribute sovereign FHE compute and validation to the Octra Network
 category: Crypto
 version: "1.0.4"
 port: 8098
 icon: https://raw.githubusercontent.com/borocode/octra-umbrel/main/boro-octra-node/icon.svg
 description: >-
-  Octra is a next-generation Layer 1 powered by Fully Homomorphic Encryption (FHE).
-  The Octra Lite Node allows you to run an observer or validator node directly from your Umbrel server,
-  participating in decentralized consensus and private computation.
-  Features:
-  - Participates in P2P gossip and consensus state synchronization.
-  - Integrated local status and telemetry dashboard on port 8080.
-  - Persistent chain storage at /var/lib/octra.
-  - Low resource footprint optimized for Raspberry Pi and home servers.
+  Octra is a breakthrough Layer 1 blockchain powered by Hypergraph Fully Homomorphic Encryption (HFHE).
+
+  The Octra Lite Node allows you to run an observer and validator node directly from your Umbrel server, contributing sovereign compute to decentralized consensus and confidential computation.
+
+  📡 Network Status:
+  This package currently connects to the active Octra Devnet Cluster (octra-devnet-9871-cluster), the public proving ground where community nodes benchmark homomorphic encryption circuits, verify zero-knowledge range proofs (PVAC), and stress-test P2P consensus gossip.
+
+  💎 Why Run an Octra Node?
+  - Help test and secure the next generation of private, encrypted smart contracts on commodity hardware.
+  - Zero configuration: Automatically initializes keys, syncs state, and tracks live consensus epochs.
+  - Built-in real-time Web Telemetry Dashboard to monitor node health and validator status.
+  - Ready for future mainnet validator set expansion directly through Umbrel updates.
 developer: Octra Labs
 website: https://octra.org
 submitter: Boro Labs
