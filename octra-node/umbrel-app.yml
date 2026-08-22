@@ -1,0 +1,31 @@
+manifestVersion: 1
+id: octra-node
+name: Octra Lite Node
+tagline: Run a private, sovereign FHE node on the Octra Network
+category: Crypto
+version: "1.0.0"
+port: 8080
+description: >-
+  Octra is a next-generation Layer 1 powered by Fully Homomorphic Encryption (FHE).
+  The Octra Lite Node allows you to run an observer or validator node directly
+  from your Umbrel server, participating in decentralized consensus and private computation.
+
+  Features:
+  - Participates in P2P gossip and consensus state synchronization.
+  - Integrated local status and telemetry dashboard on port 8080.
+  - Persistent chain storage at /var/lib/octra.
+  - Low resource footprint optimized for Raspberry Pi and home servers.
+
+developer: Octra Labs
+website: https://octra.org
+submitter: borocode
+submission: https://github.com/borocode/octra-umbrel
+repo: https://github.com/octra-labs/lite_node
+support: https://t.me/octranetwork
+gallery: []
+releaseNotes: >-
+  Initial release of the Octra Lite Node packaged for UmbrelOS.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

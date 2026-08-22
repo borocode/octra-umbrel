@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octra Lite Node // Umbrel Dashboard</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --card-bg: #0d0d0d;
+      --border: #1a331a;
+      --green: #00ff66;
+      --green-dim: #008833;
+      --text: #e0e0e0;
+      --text-muted: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 1px;
+    }
+
+    .status-badge {
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem;
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .logs-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .logs-header {
+      color: var(--green);
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    pre {
+      background: #000000;
+      border: 1px solid #111111;
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: #39ff14;
+      max-height: 200px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--green-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--green);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="title">⚡ OCTRA // LITE NODE</div>
+      <div class="status-badge">
+        <span class="dot"></span>
+        <span id="node-status">OPERATIONAL</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">Node Role</div>
+        <div class="card-value" id="node-role">Observer</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Network</div>
+        <div class="card-value" id="node-network">Octra Devnet</div>
+      </div>
+      <div class="card">
+        <div class="card-label">P2P Port</div>
+        <div class="card-value">:9000</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Consensus Port</div>
+        <div class="card-value">:19000</div>
+      </div>
+    </div>
+
+    <div class="logs-box">
+      <div class="logs-header">
+        <span>RUNTIME TELEMETRY</span>
+        <span style="font-size: 0.75rem; color: #888;">Port 8080 (RPC Proxy)</span>
+      </div>
+      <pre id="telemetry-json">Loading node telemetry from internal daemon...</pre>
+    </div>
+
+    <footer>
+      Octra Network • FHE Layer 1 • Packaged for Umbrel by <a href="https://github.com/borocode" target="_blank">borocode</a>
+    </footer>
+  </div>
+
+  <script>
+    async function updateStatus() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        document.getElementById('node-role').innerText = data.role.toUpperCase();
+        document.getElementById('node-network').innerText = data.network;
+        document.getElementById('telemetry-json').innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('node-status').innerText = 'INITIALIZING';
+      }
+    }
+
+    setInterval(updateStatus, 3000);
+    updateStatus();
+  </script>
+</body>
+</html>

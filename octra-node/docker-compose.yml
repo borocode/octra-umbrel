@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: octra-node_server_1
+      APP_PORT: 8080
+
+  server:
+    image: ghcr.io/borocode/octra-node:latest
+    restart: on-failure
+    stop_grace_period: 1m
+    ports:
+      - "9000:9000"
+      - "19000:19000"
+    volumes:
+      - ${APP_DATA_DIR}/data:/var/lib/octra
+    environment:
+      NODE_ROLE: observer
+      NODE_NAME: umbrel-octra-node
+      OCTRA_DATA_DIR: /var/lib/octra/devnet
