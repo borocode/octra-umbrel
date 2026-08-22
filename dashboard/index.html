@@ -165,21 +165,26 @@
 
     <div class="grid">
       <div class="card">
-        <div class="card-label">Node Role</div>
-        <div class="card-value" id="node-role">Observer</div>
+        <div class="card-label">Consensus Epoch</div>
+        <div class="card-value" style="color: var(--green);" id="node-epoch">Syncing...</div>
       </div>
       <div class="card">
-        <div class="card-label">Network</div>
-        <div class="card-value" id="node-network">Octra Devnet</div>
+        <div class="card-label">Node Status</div>
+        <div class="card-value" id="node-status-text">RUNNING</div>
       </div>
       <div class="card">
-        <div class="card-label">P2P Port</div>
-        <div class="card-value">:9000</div>
+        <div class="card-label">Network / Version</div>
+        <div class="card-value" id="node-version">Devnet (v3.0.0)</div>
       </div>
       <div class="card">
         <div class="card-label">Consensus Port</div>
-        <div class="card-value">:19000</div>
+        <div class="card-value">:19000 (P2P: :9000)</div>
       </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 1rem;">
+      <div class="card-label">Validator Public Address</div>
+      <div class="card-value" style="font-size: 0.85rem; word-break: break-all; color: var(--green);" id="validator-addr">Loading...</div>
     </div>
 
     <div class="logs-box">
@@ -200,15 +205,26 @@
       try {
         const res = await fetch('/api/status');
         const data = await res.json();
-        document.getElementById('node-role').innerText = data.role.toUpperCase();
-        document.getElementById('node-network').innerText = data.network;
+        if (data.epoch !== undefined) {
+          document.getElementById('node-epoch').innerText = '#' + data.epoch;
+        }
+        if (data.status) {
+          document.getElementById('node-status-text').innerText = data.status.toUpperCase();
+          document.getElementById('node-status').innerText = data.status.toUpperCase();
+        }
+        if (data.version) {
+          document.getElementById('node-version').innerText = 'Devnet (v' + data.version + ')';
+        }
+        if (data.validator) {
+          document.getElementById('validator-addr').innerText = data.validator;
+        }
         document.getElementById('telemetry-json').innerText = JSON.stringify(data, null, 2);
       } catch (err) {
         document.getElementById('node-status').innerText = 'INITIALIZING';
       }
     }
 
-    setInterval(updateStatus, 3000);
+    setInterval(updateStatus, 2000);
     updateStatus();
   </script>
 </body>

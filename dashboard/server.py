@@ -30,12 +30,15 @@ class OctraDashboardHandler(http.server.SimpleHTTPRequestHandler):
                 "data_dir": os.environ.get("OCTRA_DATA_DIR", "/var/lib/octra/devnet")
             }
             
-            # Query local Octra daemon RPC if available
+            # Query local Octra daemon RPC
             try:
-                with urllib.request.urlopen("http://127.0.0.1:8081/metrics", timeout=1) as resp:
-                    node_status["metrics"] = json.loads(resp.read().decode("utf-8"))
-            except Exception:
-                node_status["metrics"] = {"syncing": True, "peers": "connecting..."}
+                with urllib.request.urlopen("http://127.0.0.1:8081/", timeout=1) as resp:
+                    daemon_data = json.loads(resp.read().decode("utf-8"))
+                    node_status.update(daemon_data)
+                    node_status["status"] = daemon_data.get("status", "running")
+            except Exception as e:
+                node_status["status"] = "connecting"
+                node_status["error"] = str(e)
 
             self.wfile.write(json.dumps(node_status).encode("utf-8"))
         else:

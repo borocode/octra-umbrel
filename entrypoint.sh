@@ -27,7 +27,14 @@ if [ -d "$DATA_DIR/irmin_store" ] && [ ! -f "$DATA_DIR/irmin_store/HEAD.json" ];
   rm -rf "$DATA_DIR/irmin_store"
 fi
 
-# Start Web Status Dashboard in background
+# Set node daemon environment variables
+export OCTRA_API_PORT=8081
+export OCTRA_P2P_PORT=9000
+export OCTRA_DATA_DIR="$DATA_DIR"
+export OCTRA_SYNC_STAGE="$SYNC_DIR"
+export OCTRA_CHAIN_ID="octra-devnet"
+
+# Start Web Status Dashboard on port 8080 in background
 echo "📊 Launching Web Dashboard on port 8080..."
 python3 /opt/octra/dashboard/server.py &
 DASHBOARD_PID=$!
@@ -37,16 +44,7 @@ trap 'echo "🛑 Stopping Octra Node..."; kill $DASHBOARD_PID $NODE_PID 2>/dev/n
 
 echo "🚀 Executing Octra Node binary in role: $NODE_ROLE..."
 
-/opt/octra/bin/octra_node.exe \
-  --role "$NODE_ROLE" \
-  --name "$NODE_NAME" \
-  --advertise "$PUBLIC_HOST:19000" \
-  --api-port 8081 \
-  --consensus-port 19000 \
-  --p2p-port 9000 \
-  --data-dir "$DATA_DIR" \
-  --sync-stage "$SYNC_DIR" \
-  --network /opt/octra/config/network.env &
+/opt/octra/bin/octra_node.exe &
 
 NODE_PID=$!
 wait $NODE_PID
