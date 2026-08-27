@@ -4,3 +4,14 @@ node_modules/
 data/
 _build/
 *.exe
+
+# Local secret hygiene
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*
+*secrets*
