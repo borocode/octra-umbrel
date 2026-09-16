@@ -41,7 +41,7 @@ RUN git clone --branch main --single-branch https://github.com/octra-labs/lite_n
 # Initialize OPAM, install OCaml 4.14.2 and all project dependencies
 RUN opam init --disable-sandboxing --bare -a -y \
     && opam switch create ocaml-system 4.14.2 \
-    && opam install -y . --deps-only
+    && (opam install -y . --deps-only --locked || (opam pin add -y lmdb 1.1.1 && opam install -y . --deps-only))
 
 # Build MCL cryptography library
 WORKDIR /build/octra/mcl
@@ -55,7 +55,8 @@ RUN opam exec -- dune build --profile release \
     bin/octra_pvac_worker.exe \
     bin/octra_state_sync_client.exe \
     bin/octra_state_sync_manifest.exe \
-    bin/bft_control_tx.exe
+    bin/bft_control_tx.exe \
+    bin/vote_floor.exe
 
 # Copy patch script for webcli
 COPY patch_webcli.py /build/patch_webcli.py
